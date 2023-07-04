@@ -42,9 +42,6 @@ function Profile() {
   const [yearOfStudy, setYearOfStudy] = useState('');
   const [isEditing, setIsEditing] = useState(true);
 
-  useEffect(() => {
-    console.log(supabase.auth.getUser().then(res => console.log(res)))
-  }, [])
 
   useEffect(() => {
     const fetchProfile = async () => {
