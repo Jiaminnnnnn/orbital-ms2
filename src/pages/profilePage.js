@@ -43,9 +43,14 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
+    console.log(supabase.auth.getUser().then(res => console.log(res)))
+  }, [])
+
+  useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const user = supabase.auth.getUser();
+        const userResponse = await supabase.auth.getUser();
+        const user = userResponse.data.user
         if (user) {
           const { data: profile, error } = await supabase
             .from('users')
@@ -79,17 +84,21 @@ function Profile() {
     e.preventDefault();
 
     try {
-      const user = supabase.auth.getUser();
+      const userResponse = await supabase.auth.getUser();
+      const user = userResponse.data.user
       if (!user) {
         console.error('User not authenticated');
         return;
       }
 
+      console.log(user)
+
       const { data, error } = await supabase
         .from('users')
-        .update({
+        .insert({
           username,
           gender,
+          email: user.email,
           course_of_study: courseOfStudy,
           year_of_study: yearOfStudy,
         })
@@ -121,7 +130,7 @@ function Profile() {
       navigate('/'); // Redirect to the login page if the user is not authenticated
     } else {
       // Call createAccessPolicy to create the access policy when the component mounts
-      createAccessPolicy();
+      // createAccessPolicy();
     }
   }, [navigate]);
 
