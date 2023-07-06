@@ -30,29 +30,32 @@ export default function Auth() {
 
   return (
     <ChakraProvider theme={customTheme}>
-      <Container>
-        <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
-        <Flex flexDirection="column" alignItems="center" justifyContent="center" minHeight="10vh">
-          <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
-          <Box marginBottom="20px" width="300px">
-            <Input
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              required={true}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Box>
-          <Button
-            className="button block"
-            disabled={loading}
-            fontWeight="normal"
-          >
-            {loading ? <span>Loading</span> : <span>Send magic link</span>}
-          </Button>
-        </Flex>
-      </Container>
+      <Box bg="gray.200" minHeight="100vh" display="flex" justifyContent="center" alignItems="center">
+        <Box bg="white" p="20px" width="400px">
+          <Container>
+            <Heading my="30px" color="blue.300">Stay The Course</Heading>
+            <Flex flexDirection="column" alignItems="center">
+              <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
+              <Box marginBottom="20px" width="100%">
+                <Input
+                  className="inputField"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  required={true}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Box>
+              <Button
+                className="button block"
+                disabled={loading}
+              >
+                {loading ? <span>Loading</span> : <span>Send magic link</span>}
+              </Button>
+            </Flex>
+          </Container>
+        </Box>
+      </Box>
     </ChakraProvider>
   )
 }
