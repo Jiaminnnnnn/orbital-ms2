@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Avatar from './Avatar'
-import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
