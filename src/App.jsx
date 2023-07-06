@@ -1,8 +1,8 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Login from './pages/loginPage'
-import Profile from './pages/profilePage'
+import Login from './loginPage'
+import Profile from './profilePage'
 
 function App() {
   const [session, setSession] = useState(null)
@@ -16,7 +16,7 @@ function App() {
       setSession(session)
     })
   }, [])
-  
+
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
