@@ -24,12 +24,6 @@ export default function Auth() {
     <Container>
       <Heading my="30px" p="10px">Stay The Course</Heading>
       <Text marginLeft="30px" color="blue.300" fontweight="bold">Sign in via magic link with your email below</Text>
-    /*
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget">
-        <h1 className="header">Stay The Course</h1>
-        <p className="description">Sign in via magic link with your email below</p>
-        */
         <form className="form-widget" onSubmit={handleLogin}>
           <div>
             <input
@@ -47,8 +41,6 @@ export default function Auth() {
             </button>
           </div>
         </form>
-      </div>
-    </div>
     </Container>
   )
 }
