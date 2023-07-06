@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
 
 const customTheme = extendTheme({
   fonts: {
@@ -29,31 +29,34 @@ export default function Auth() {
 
   return (
     <ChakraProvider theme={customTheme}>
-      <Box bg="gray.200" width="100%" height="100%">
-        <Box bg="white" p="20px" width="400px" mx="auto">
-          <Container>
-            <Heading my="30px" color="blue.300">Stay The Course</Heading>
-            <Flex flexDirection="column" alignItems="center">
-              <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
-              <Box marginBottom="20px" width="100%">
-                <Input
-                  className="inputField"
-                  type="email"
-                  placeholder="Your email"
-                  value={email}
-                  required={true}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Box>
-              <Button
-                className="button block"
-                disabled={loading}
-              >
-                {loading ? <span>Loading</span> : <span>Send magic link</span>}
-              </Button>
-            </Flex>
-          </Container>
-        </Box>
+      <CSSReset />
+      <Box bg="gray.200" minHeight="100vh">
+        <Flex justifyContent="center" alignItems="center" height="100%">
+          <Box bg="white" p="20px" width="400px">
+            <Container>
+              <Heading my="30px" color="blue.300">Stay The Course</Heading>
+              <Flex flexDirection="column" alignItems="center">
+                <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
+                <Box marginBottom="20px" width="100%">
+                  <Input
+                    className="inputField"
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    required={true}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Box>
+                <Button
+                  className="button block"
+                  disabled={loading}
+                >
+                  {loading ? <span>Loading</span> : <span>Send magic link</span>}
+                </Button>
+              </Flex>
+            </Container>
+          </Box>
+        </Flex>
       </Box>
     </ChakraProvider>
   )
