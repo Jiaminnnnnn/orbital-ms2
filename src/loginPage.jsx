@@ -30,7 +30,7 @@ export default function Auth() {
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-      <Box bg="gray.200" minHeight="100vh">
+      <Box bg="gray.200" minHeight="100vh" minWidth="100vh">
         <Flex justifyContent="center" alignItems="center" height="100%">
           <Box bg="white" p="20px" width="400px">
             <Container>
