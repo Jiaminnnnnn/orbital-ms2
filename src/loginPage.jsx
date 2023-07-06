@@ -33,6 +33,7 @@ export default function Auth() {
             value={email}
             required={true}
             onChange={(e) => setEmail(e.target.value)}
+            width="100%"
           />
         </Box>
         <Button
@@ -45,3 +46,4 @@ export default function Auth() {
     </Container>
   )
 }
+
