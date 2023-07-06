@@ -16,12 +16,12 @@ function App() {
       setSession(session)
     })
   }, [])
-
+  
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
     </div>
   )
-}git remote -v
+}
 
 export default App
