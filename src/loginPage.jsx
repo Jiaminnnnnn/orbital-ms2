@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Input } from '@chakra-ui/react'
 
-export default function Login() {
+export default function Auth() {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
 
