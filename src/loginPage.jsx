@@ -3,14 +3,6 @@ import { supabase } from './supabaseClient'
 import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, withDefaultColorScheme} from "@chakra-ui/react";
 
 const customTheme = extendTheme({
-  colors: {
-    primary: {
-      50: '#f7fafc',
-      100: '#edf2f7',
-      500: '#3182ce', 
-      900: '#1a365d',
-    },
-  },
   fonts: {
     body: 'Georgia, sans-serif',
     heading: 'Georgia, serif',
@@ -55,6 +47,7 @@ export default function Auth() {
           <Button
             className="button block"
             disabled={loading}
+            fontWeight="normal"
           >
             {loading ? <span>Loading</span> : <span>Send magic link</span>}
           </Button>
