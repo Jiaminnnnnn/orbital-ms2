@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Container, Heading, Text, Input, Button } from "@chakra-ui/react";
+import { Container, Heading, Text, Input, Button, Flex, Box } from "@chakra-ui/react";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
@@ -23,9 +23,9 @@ export default function Auth() {
   return (
     <Container>
       <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
-      <Text marginLeft="25px" fontWeight="bold">Sign in via magic link with your email below</Text>
-      <form className="form-widget" onSubmit={handleLogin}>
-        <div>
+      <Flex flexDirection="column" alignItems="flex-start" marginLeft="25px">
+        <Text fontWeight="bold" marginBottom="10px">Sign in via magic link</Text>
+        <Box marginBottom="10px">
           <Input
             className="inputField"
             type="email"
@@ -34,16 +34,14 @@ export default function Auth() {
             required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div>
-          <Button
-            className="button block"
-            disabled={loading}
-          >
-            {loading ? <span>Loading</span> : <span>Send magic link</span>}
-          </Button>
-        </div>
-      </form>
+        </Box>
+        <Button
+          className="button block"
+          disabled={loading}
+        >
+          {loading ? <span>Loading</span> : <span>Send magic link</span>}
+        </Button>
+      </Flex>
     </Container>
   )
 }
