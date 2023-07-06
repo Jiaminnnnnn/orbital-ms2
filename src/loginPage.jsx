@@ -24,7 +24,7 @@ export default function Auth() {
   return (
     <Container>
       <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
-      <Text marginLeft="30px" fontWeight="bold">Sign in via magic link with your email below</Text>
+      <Text marginLeft="25px" fontWeight="bold">Sign in via magic link with your email below</Text>
         <form className="form-widget" onSubmit={handleLogin}>
           <div>
             <Input
@@ -37,9 +37,11 @@ export default function Auth() {
             />
           </div>
           <div>
-            <button className={'button block'} disabled={loading}>
+            <Button 
+            className={'button block'} 
+            disabled={loading}>
               {loading ? <span>Loading</span> : <span>Send magic link</span>}
-            </button>
+            </Button>
           </div>
         </form>
     </Container>
