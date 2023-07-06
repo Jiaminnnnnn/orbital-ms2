@@ -24,8 +24,8 @@ export default function Auth() {
     <Container>
       <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
       <Flex flexDirection="column" alignItems="flex-start" marginLeft="25px">
-        <Text fontWeight="bold" marginBottom="10px">Sign in via magic link</Text>
-        <Box marginBottom="10px">
+        <Text fontWeight="bold" marginBottom="10px">Sign in via magic link with your email below</Text>
+        <Box marginBottom="20px">
           <Input
             className="inputField"
             type="email"
