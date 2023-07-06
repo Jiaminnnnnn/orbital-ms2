@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, withDefaultColorScheme} from "@chakra-ui/react";
+import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 const customTheme = extendTheme({
   fonts: {
@@ -8,7 +8,6 @@ const customTheme = extendTheme({
     heading: 'Georgia, serif',
   },
 });
-
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
