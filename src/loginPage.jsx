@@ -30,9 +30,8 @@ export default function Auth() {
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-      <Box bg="gray.200" minHeight="100vh" minWidth="200vh">
         <Flex justifyContent="center" alignItems="center" height="100%">
-          <Box bg="white" p="20px" width="400px">
+          <Box bg="gray.200" p="20px" width="400px">
             <Container>
               <Heading my="30px" color="blue.300">Stay The Course</Heading>
               <Flex flexDirection="column" alignItems="center">
@@ -57,7 +56,6 @@ export default function Auth() {
             </Container>
           </Box>
         </Flex>
-      </Box>
     </ChakraProvider>
   )
 }
