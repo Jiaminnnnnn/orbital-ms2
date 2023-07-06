@@ -29,8 +29,8 @@ export default function Auth() {
 
   return (
     <ChakraProvider theme={customTheme}>
-      <Box bg="gray.200">
-        <Box bg="white" p="20px" width="400px">
+      <Box bg="gray.200" minHeight="100vh">
+        <Box bg="white" p="20px" width="400px" mx="auto">
           <Container>
             <Heading my="30px" color="blue.300">Stay The Course</Heading>
             <Flex flexDirection="column" alignItems="center">
