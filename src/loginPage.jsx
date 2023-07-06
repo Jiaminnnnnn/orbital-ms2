@@ -23,7 +23,7 @@ export default function Auth() {
   return (
     <Container>
       <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
-      <Flex flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
+      <Flex flexDirection="column" alignItems="center" justifyContent="center" minHeight="10vh">
         <Text fontWeight="bold" marginBottom="10px">Sign in via magic link with your email below</Text>
         <Box marginBottom="20px" width="30px">
           <Input
