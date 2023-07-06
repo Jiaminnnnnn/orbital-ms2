@@ -23,9 +23,9 @@ export default function Auth() {
   return (
     <Container>
       <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
-      <Flex flexDirection="column" alignItems="flex-start" marginLeft="25px">
+      <Flex flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
         <Text fontWeight="bold" marginBottom="10px">Sign in via magic link with your email below</Text>
-        <Box marginBottom="20px">
+        <Box marginBottom="20px" width="300px">
           <Input
             className="inputField"
             type="email"
@@ -33,7 +33,6 @@ export default function Auth() {
             value={email}
             required={true}
             onChange={(e) => setEmail(e.target.value)}
-            width="100%"
           />
         </Box>
         <Button
@@ -46,4 +45,3 @@ export default function Auth() {
     </Container>
   )
 }
-
