@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Container, Heading, Text } from "@chakra-ui/react";
+import { Container, Heading, Text,Input } from "@chakra-ui/react";
+
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
@@ -22,11 +23,11 @@ export default function Auth() {
 
   return (
     <Container>
-      <Heading my="30px" p="10px">Stay The Course</Heading>
-      <Text marginLeft="30px" color="blue.300" fontweight="bold">Sign in via magic link with your email below</Text>
+      <Heading my="30px" p="10px" color="blue.300">Stay The Course</Heading>
+      <Text marginLeft="30px" fontWeight="bold">Sign in via magic link with your email below</Text>
         <form className="form-widget" onSubmit={handleLogin}>
           <div>
-            <input
+            <Input
               className="inputField"
               type="email"
               placeholder="Your email"
