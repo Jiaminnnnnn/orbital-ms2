@@ -40,7 +40,7 @@
               <Flex flexDirection="column" alignItems="center">
                   <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
                 </Flex>  
-          <form className="form-widget" onSubmit={handleLogin}>
+          <form className="form-widget" onSubmit={handleLogin} style={{ textAlign: 'center' }}>
           <Box marginBottom="20px" width="100%">
             <div>
               <Input
