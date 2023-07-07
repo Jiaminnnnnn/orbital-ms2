@@ -4,6 +4,9 @@ import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, ext
 import { useNavigate } from 'react-router-dom';
 
 const customTheme = extendTheme({
+  styles: {
+    bg: 'blue.300',
+  }, 
   fonts: {
     body: 'Georgia, sans-serif',
     heading: 'Georgia, serif',
@@ -33,7 +36,6 @@ export default function Login() {
   
   return (
     <ChakraProvider theme={customTheme}>
-    <Box bg="blue.300" minHeight="100vh" display="flex" alignItems="center" justifyContent="center">
     <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
     <CSSReset />
       <Flex justifyContent="center" alignItems="center" height="100%">
@@ -64,7 +66,6 @@ export default function Login() {
         </Container>
         </Flex>
         </Stack>
-        </Box>
         </ChakraProvider>
   )
 }
