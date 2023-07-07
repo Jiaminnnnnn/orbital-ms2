@@ -33,7 +33,9 @@
         <Flex justifyContent="center" alignItems="center" height="100%">
             <Container>
               <Heading my="30px" color="blue.300">Stay The Course</Heading>
-          <p className="description">Sign in via magic link with your email below</p>
+              <Flex flexDirection="column" alignItems="center">
+                  <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
+                </Flex>  
           <form className="form-widget" onSubmit={handleLogin}>
             <div>
               <input
