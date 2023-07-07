@@ -37,8 +37,9 @@
                   <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">Sign in via magic link with your email below</Text>
                 </Flex>  
           <form className="form-widget" onSubmit={handleLogin}>
+          <Box marginBottom="20px" width="100%">
             <div>
-              <input
+              <Input
                 className="inputField"
                 type="email"
                 placeholder="Your email"
@@ -47,10 +48,11 @@
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+            </Box>
             <div>
-              <button className={'button block'} disabled={loading}>
+              <Button className={'button block'} disabled={loading}>
                 {loading ? <span>Loading</span> : <span>Send magic link</span>}
-              </button>
+              </Button>
             </div>
           </form>
           </Container>
