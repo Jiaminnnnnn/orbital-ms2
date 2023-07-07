@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './loginPage';
 import Home from './homePage';
 import Profile from './profilePage';
@@ -6,7 +6,7 @@ import Profile from './profilePage';
 export default function App() {
   return (
     <Router>
-      <Switch>
+      <Routes>
         <Route exact path="/">
           <Login />
         </Route>
@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/profile">
           <Profile />
         </Route>
-      </Switch>
+      </Routes>
     </Router>
   );
 }
