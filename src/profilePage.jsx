@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, IconButton, Box } from '@chakra-ui/react';
+import { Select, Button, FormControl, FormLabel, Input, Flex, IconButton, Center } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
@@ -63,16 +63,8 @@ export default function Profile({ session }) {
   }
 
   return (
-    <form onSubmit={updateProfile} className="form-widget"> 
-      <Box position="relative">
-        <Avatar
-          url={avatar_url}
-          size={150}
-          onUpload={(event, url) => {
-            setAvatarUrl(url)
-            updateProfile(event)
-          }}
-        />
+    <Center height="100vh">
+      <Flex direction="column" alignItems="center">
         <IconButton
           position="absolute"
           top="0"
@@ -81,56 +73,66 @@ export default function Profile({ session }) {
           icon={<ArrowBackIcon />}
           onClick={() => navigate('/home')}
         />
-      </Box>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Name</label>
-        <input
-          id="username"
-          type="text"
-          required
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="year_of_study">Year Of Study</label>
-        <Select
-          id="year_of_study"
-          type="text"
-          required
-          value={year_of_study || ''}
-          onChange={(e) => setYearOfStudy(e.target.value)}
-        >
-          <option value="">Select Year of Study</option>
-          <option value="Year 1">Year 1</option>
-          <option value="Year 2">Year 2</option>
-          <option value="Year 3">Year 3</option>
-        </Select>
-      </div>
-      <div>
-        <label htmlFor="course_of_study">Course Of Study</label>
-        <input
-          id="course_of_study"
-          type="text"
-          required
-          value={course_of_study || ''}
-          onChange={(e) => setCourseOfStudy(e.target.value)}
-        />
-      </div>
-      <div>
-        <Button className="button block primary" type="submit" disabled={loading}>
-          {loading ? 'Loading ...' : 'Update'}
-        </Button>
-      </div>
-      <div>
-        <Button className="button block" onClick={() => supabase.auth.signOut()}>
-          Log out
-        </Button>
-      </div>
-    </form>
+        <form onSubmit={updateProfile} className="form-widget">
+          <Avatar
+            url={avatar_url}
+            size={150}
+            onUpload={(event, url) => {
+              setAvatarUrl(url);
+              updateProfile(event);
+            }}
+          />
+          <div>
+            <label htmlFor="email">Email</label>
+            <input id="email" type="text" value={session.user.email} disabled />
+          </div>
+          <div>
+            <label htmlFor="username">Name</label>
+            <input
+              id="username"
+              type="text"
+              required
+              value={username || ''}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="year_of_study">Year Of Study</label>
+            <Select
+              id="year_of_study"
+              type="text"
+              required
+              value={year_of_study || ''}
+              onChange={(e) => setYearOfStudy(e.target.value)}
+            >
+              <option value="">Select Year of Study</option>
+              <option value="Year 1">Year 1</option>
+              <option value="Year 2">Year 2</option>
+              <option value="Year 3">Year 3</option>
+            </Select>
+          </div>
+          <div>
+            <label htmlFor="course_of_study">Course Of Study</label>
+            <input
+              id="course_of_study"
+              type="text"
+              required
+              value={course_of_study || ''}
+              onChange={(e) => setCourseOfStudy(e.target.value)}
+            />
+          </div>
+          <div>
+            <Button className="button block primary" type="submit" disabled={loading}>
+              {loading ? 'Loading ...' : 'Update'}
+            </Button>
+          </div>
+          <div>
+            <Button className="button block" onClick={() => supabase.auth.signOut()}>
+              Log out
+            </Button>
+          </div>
+        </form>
+      </Flex>
+    </Center>
   );
 }
