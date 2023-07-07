@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, ArrowBackIcon } from '@chakra-ui/react';
+import { Select, Button } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true);
