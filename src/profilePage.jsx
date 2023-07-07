@@ -5,7 +5,8 @@ import Avatar from './Avatar'
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [courseOfStudy, setCourseOfStudy] = useState(null)
+  const [course_of_study, setCourseOfStudy] = useState(null)
+  const [year_of_study, setYearOfStudy] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Profile({ session }) {
 
       let { data, error } = await supabase
         .from('profiles')
-        .select(`username, course_of_study, avatar_url`)
+        .select(`username, course_of_study, year_of_study, avatar_url`)
         .eq('id', user.id)
         .single()
 
@@ -24,6 +25,7 @@ export default function Profile({ session }) {
       } else if (data) {
         setUsername(data.username)
         setCourseOfStudy(data.course_of_study)
+        setYearOfStudy(data.year_of_study)
         setAvatarUrl(data.avatar_url)
       }
 
@@ -42,7 +44,8 @@ export default function Profile({ session }) {
     const updates = {
       id: user.id,
       username,
-      website,
+      course_of_study,
+      year_of_study,
       avatar_url,
       updated_at: new Date(),
     }
@@ -80,15 +83,25 @@ export default function Profile({ session }) {
         />
       </div>
       <div>
-        <label htmlFor="website">Website</label>
+        <label htmlFor="course_of_study">Course Of Study</label>
         <input
-          id="website"
-          type="url"
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
+          id="course_of_study"
+          type="text"
+          required
+          value={course_of_study || ''}
+          onChange={(e) => setCourseOfStudy(e.target.value)}
         />
       </div>
-
+      <div>
+        <label htmlFor="year_of_study">Year Of Study</label>
+        <input
+          id="year_of_study"
+          type="text"
+          required
+          value={year_of_study || ''}
+          onChange={(e) => setYearOfStudy(e.target.value)}
+        />
+      </div>
       <div>
         <button className="button block primary" type="submit" disabled={loading}>
           {loading ? 'Loading ...' : 'Update'}

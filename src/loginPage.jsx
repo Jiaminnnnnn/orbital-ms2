@@ -17,11 +17,7 @@
       event.preventDefault()
 
       setLoading(true)
-      const { error } = await supabase.auth.signInWithOtp({ email,
-        options: {
-          emailRedirectTo: 'https://example.com/welcome',
-        },
-      })
+      const { error } = await supabase.auth.signInWithOtp({ email })
 
       if (error) {
         alert(error.error_description || error.message)

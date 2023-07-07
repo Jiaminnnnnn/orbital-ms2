@@ -1,30 +1,40 @@
-import './App.css'
-import { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import Login from './loginPage'
-import Profile from './profilePage'
-import { ChakraProvider } from '@chakra-ui/react'
+import './App.css';
+import { useState, useEffect } from 'react';
+import { supabase } from './supabaseClient';
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Login from './loginPage';
+import Profile from './profilePage';
 
 function App() {
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+      setSession(session);
+    });
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+      setSession(session);
+    });
+  }, []);
 
   return (
     <ChakraProvider>
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
-    </div>
+      <div className="container" style={{ padding: '50px 0 100px 0' }}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
+            </Route>
+            <Route path="/profile">
+              <Profile key={session?.user.id} session={session} />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     </ChakraProvider>
-  )
+  );
 }
 
-export default App
+export default App;
