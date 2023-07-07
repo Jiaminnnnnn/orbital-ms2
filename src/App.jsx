@@ -1,6 +1,4 @@
-import './App.css'
-import { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './loginPage';
 import Profile from './profilePage';
@@ -27,18 +25,40 @@ function App() {
     setSession(null);
   };
 
+
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       <Router>
         <Routes>
           <Route
             path="/"
-            element={!session ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/home" />}
+            element={
+              session ? (
+                <Navigate to="/home" />
+              ) : (
+                <Login onLoginSuccess={handleLoginSuccess} />
+              )
+            }
           />
-          <Route path="/home" element={<Home session={session} />} />
+          <Route
+            path="/home"
+            element={
+              session ? (
+                <Home />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
           <Route
             path="/profile"
-            element={session ? <Profile session={session} onLogout={handleLogout} /> : <Navigate to="/" />}
+            element={
+              session ? (
+                <Profile onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
         </Routes>
       </Router>
@@ -46,5 +66,5 @@ function App() {
   );
 }
 
+export default App;
 
-export default App
