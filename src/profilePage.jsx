@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
-import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
 import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, AttachmentIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true);
@@ -62,6 +61,35 @@ export default function Profile({ session }) {
     setLoading(false);
   }
 
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+
+      setLoading(true);
+      try {
+        const { data, error } = await supabase.storage
+          .from('avatars')
+          .upload(fileName, file);
+
+        if (error) {
+          throw error;
+        }
+
+        const avatarUrl = data?.Key;
+
+        setAvatarUrl(avatarUrl);
+      } catch (error) {
+        console.error('Error uploading avatar:', error.message);
+        alert('Error uploading avatar. Please try again.');
+      }
+
+      setLoading(false);
+    }
+  };
+
   return (
     <Container centerContent minHeight="100vh">
       <Flex direction="column" alignItems="center" justify="center">
@@ -70,25 +98,46 @@ export default function Profile({ session }) {
           top="1rem"
           left="1rem"
           aria-label="Back"
-          size='lg'
+          size='25px'
           icon={<ArrowBackIcon />}
           onClick={() => navigate('/home')}
         />
         <form onSubmit={updateProfile} className="form-widget">
-          <Avatar
-            url={avatar_url}
-            size={150}
-            onUpload={(event, url) => {
-              setAvatarUrl(url);
-              updateProfile(event);
-            }}
-          />
+          <Box my={4} textAlign="center">
+            <label htmlFor="avatar-upload" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Box
+                as="span"
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+                width="150px"
+                height="150px"
+                borderRadius="50%"
+                bg="gray.200"
+                overflow="hidden"
+                cursor="pointer"
+              >
+                {avatar_url ? (
+                  <img src={avatar_url} alt="Avatar" width="100%" height="100%" />
+                ) : (
+                  <AttachmentIcon boxSize={6} color="gray.400" />
+                )}
+              </Box>
+              <input
+                id="avatar-upload"
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleFileUpload}
+              />
+            </label>
+          </Box>
           <Box my={4} textAlign="center">
             <Text fontSize="lg" fontWeight="bold" mb={2}>Email</Text>
             <input id="email" type="text" value={session.user.email} disabled />
           </Box>
           <Box my={4} textAlign="center">
-            <Text fontSize="lg" fontWeight="bold" mb={2}>Name</Text>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>User Name</Text>
             <input
               id="username"
               type="text"
