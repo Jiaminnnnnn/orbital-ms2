@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button,  Flex, IconButton, Box, Container } from '@chakra-ui/react';
+import { Select, Button, Flex, IconButton, Box, Container } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
@@ -63,15 +63,16 @@ export default function Profile({ session }) {
   }
 
   return (
-    <Container centerContent>
-      <Box height="100vh" display="flex" alignItems="center">
-        <Box position="absolute" top="0" left="0">
-          <IconButton
-            aria-label="Back"
-            icon={<ArrowBackIcon />}
-            onClick={() => navigate('/home')}
-          />
-        </Box>
+    <Container centerContent minHeight="100vh">
+      <Flex direction="column" alignItems="center" justify="center">
+        <IconButton
+          position="absolute"
+          top="1rem"
+          left="1rem"
+          aria-label="Back"
+          icon={<ArrowBackIcon />}
+          onClick={() => navigate('/home')}
+        />
         <form onSubmit={updateProfile} className="form-widget">
           <Avatar
             url={avatar_url}
@@ -81,11 +82,11 @@ export default function Profile({ session }) {
               updateProfile(event);
             }}
           />
-          <div>
+          <Box my={4} textAlign="center">
             <label htmlFor="email">Email</label>
             <input id="email" type="text" value={session.user.email} disabled />
-          </div>
-          <div>
+          </Box>
+          <Box my={4} textAlign="center">
             <label htmlFor="username">Name</label>
             <input
               id="username"
@@ -94,8 +95,8 @@ export default function Profile({ session }) {
               value={username || ''}
               onChange={(e) => setUsername(e.target.value)}
             />
-          </div>
-          <div>
+          </Box>
+          <Box my={4} textAlign="center">
             <label htmlFor="year_of_study">Year Of Study</label>
             <Select
               id="year_of_study"
@@ -109,8 +110,8 @@ export default function Profile({ session }) {
               <option value="Year 2">Year 2</option>
               <option value="Year 3">Year 3</option>
             </Select>
-          </div>
-          <div>
+          </Box>
+          <Box my={4} textAlign="center">
             <label htmlFor="course_of_study">Course Of Study</label>
             <input
               id="course_of_study"
@@ -119,19 +120,17 @@ export default function Profile({ session }) {
               value={course_of_study || ''}
               onChange={(e) => setCourseOfStudy(e.target.value)}
             />
-          </div>
-          <div>
-            <Button className="button block primary" type="submit" disabled={loading}>
+          </Box>
+          <Box my={4} textAlign="center">
+            <Button type="submit" disabled={loading}>
               {loading ? 'Loading ...' : 'Update'}
             </Button>
-          </div>
-          <div>
-            <Button className="button block" onClick={() => supabase.auth.signOut()}>
-              Log out
-            </Button>
-          </div>
+          </Box>
+          <Box my={4} textAlign="center">
+            <Button onClick={() => supabase.auth.signOut()}>Log out</Button>
+          </Box>
         </form>
-      </Box>
+      </Flex>
     </Container>
   );
 }
