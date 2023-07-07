@@ -16,12 +16,15 @@ const ApplicationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const {data: { session },} = await supabase.auth.getSession();
         
     
         const { data, error } = await supabase
             .from('tutor_applications')
             .insert([
                 { 
+                    uuid: session ? session.user.id : null,
                     name: name, 
                     module: module, 
                     bio: bio, 
