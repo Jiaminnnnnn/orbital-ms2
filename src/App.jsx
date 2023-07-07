@@ -4,7 +4,7 @@ import { supabase } from './supabaseClient'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './loginPage';
 import Profile from './profilePage';
-import HomePage from './homePage';
+import Home from './homePage';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -21,15 +21,6 @@ function App() {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
-    </div>
-  )
-}
-
-export default App
-/*
-  return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
       <Router>
         <Routes>
           <Route path="/" element={!session ? <Login /> : <Home />} />
@@ -41,4 +32,3 @@ export default App
 }
 
 export default App
-*/
