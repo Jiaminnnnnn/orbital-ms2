@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './LoginPage';
-import Profile from './ProfilePage';
-import HomePage from './HomePage';
+import Login from './loginPage';
+import Profile from './profilePage';
+import HomePage from './homePage';
 
 function App() {
   const [session, setSession] = useState(null);
