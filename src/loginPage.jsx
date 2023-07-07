@@ -25,14 +25,13 @@
         alert(error.error_description || error.message)
       } else {
         alert('Check your email for the login link!')
-        navigate('/home')
       }
       setLoading(false)
     }
 
     useEffect(() => {
       const handleSession = async () => {
-        const user = supabase.auth.user();
+        const user = supabase.auth.getUser();
   
         if (user) {
           navigate('/home');
