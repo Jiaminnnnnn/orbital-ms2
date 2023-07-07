@@ -64,10 +64,6 @@ export default function Profile({ session }) {
   return (
     <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <Box display="flex" alignItems="center" justifyContent="center">
-        <FormControl>
-          <FormLabel htmlFor="avatar">Profile Photo</FormLabel>
-          <Input type="file" id="avatar" accept="image/*" onChange={handleAvatarUpload} />
-        </FormControl>
         <Avatar
       url={avatar_url}
       size={150}
