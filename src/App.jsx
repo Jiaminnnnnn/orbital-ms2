@@ -32,7 +32,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
-          <Route path="/home" element={<HomePage session={session} />} />
+          <Route path="/home" element={<Home session={session} />} />
           <Route path="/profile" element={<Profile session={session} />} />
         </Routes>
       </Router>
