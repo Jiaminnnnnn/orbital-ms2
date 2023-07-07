@@ -34,9 +34,9 @@ export default function Login() {
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-      <Flex justifyContent="center" alignItems="center" height="100vh" width="100%">
-        <Container justifyContent="center">
-          <Flex flexDirection="column" alignItems="center">
+      <Flex justifyContent="center" alignItems="center" height="100vh">
+        <Container>
+          <Flex flexDirection="column" alignItems="center" justifyContent="center">
             <Heading my="30px" color="blue.300">
               Stay The Course
             </Heading>

@@ -70,15 +70,15 @@ export default function Profile({ session }) {
   }
 
   return (
-    <form onSubmit={updateProfile} className="form-widget">
+    <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <Avatar
-      url={avatar_url}
-      size={150}
-      onUpload={(event, url) => {
-        setAvatarUrl(url)
-        updateProfile(event)
-      }}
-    />
+        url={avatar_url}
+        size={150}
+        onUpload={(event, url) => {
+          setAvatarUrl(url)
+          updateProfile(event)
+        }}
+      />
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -101,7 +101,7 @@ export default function Profile({ session }) {
           required
           value={year_of_study || ''}
           onChange={handleYearOfStudyChange}
-          >
+        >
           <option value="">Select Year of Study</option>
           <option value="Year 1">Year 1</option>
           <option value="Year 2">Year 2</option>
@@ -133,7 +133,7 @@ export default function Profile({ session }) {
         <button className="button block" type="button" onClick={() => navigate('/home')}>
           Back
         </button>
-        </div>
+      </div>
     </form>
   )
 }
