@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, FormControl, FormLabel, Input, Flex, IconButton, Center } from '@chakra-ui/react';
+import { Select, Button,  Flex, IconButton, Box } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
@@ -63,7 +63,7 @@ export default function Profile({ session }) {
   }
 
   return (
-    <Center height="100vh">
+    <Box display="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
       <Flex direction="column" alignItems="center">
         <IconButton
           position="absolute"
@@ -133,6 +133,6 @@ export default function Profile({ session }) {
           </div>
         </form>
       </Flex>
-    </Center>
+      </Box>
   );
 }
