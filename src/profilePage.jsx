@@ -70,6 +70,7 @@ export default function Profile({ session }) {
           top="1rem"
           left="1rem"
           aria-label="Back"
+          size='lg'
           icon={<ArrowBackIcon />}
           onClick={() => navigate('/home')}
         />
