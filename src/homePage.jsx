@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { Text, Button } from '@chakra-ui/react';
 
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
+      <Text>Dashboard</Text>
       <Link to="/profile">Profile</Link>
     </div>
   );
