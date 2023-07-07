@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, Flex, IconButton, Box, Container } from '@chakra-ui/react';
+import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function Profile({ session }) {
@@ -84,11 +84,11 @@ export default function Profile({ session }) {
             }}
           />
           <Box my={4} textAlign="center">
-            <label htmlFor="email">Email</label>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Email</Text>
             <input id="email" type="text" value={session.user.email} disabled />
           </Box>
           <Box my={4} textAlign="center">
-            <label htmlFor="username">Name</label>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Name</Text>
             <input
               id="username"
               type="text"
@@ -98,7 +98,7 @@ export default function Profile({ session }) {
             />
           </Box>
           <Box my={4} textAlign="center">
-            <label htmlFor="year_of_study">Year Of Study</label>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Year Of Study</Text>
             <Select
               id="year_of_study"
               type="text"
@@ -113,7 +113,7 @@ export default function Profile({ session }) {
             </Select>
           </Box>
           <Box my={4} textAlign="center">
-            <label htmlFor="course_of_study">Course Of Study</label>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Course Of Study</Text>
             <input
               id="course_of_study"
               type="text"
