@@ -13,7 +13,7 @@
   export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
-    //const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogin = async (event) => {
       event.preventDefault()
