@@ -25,10 +25,22 @@
         alert(error.error_description || error.message)
       } else {
         alert('Check your email for the login link!')
-        navigate('/home');
+        navigate('/home')
       }
       setLoading(false)
     }
+
+    useEffect(() => {
+      const handleSession = async () => {
+        const user = supabase.auth.user();
+  
+        if (user) {
+          navigate('/home');
+        }
+      };
+  
+      handleSession();
+    }, [navigate]);
 
     return (
       <ChakraProvider theme={customTheme}>
