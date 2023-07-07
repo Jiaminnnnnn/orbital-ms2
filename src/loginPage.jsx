@@ -28,9 +28,11 @@
     }
 
     return (
-      <div className="row flex flex-center">
-        <div className="col-6 form-widget">
-          <h1 className="header">Supabase + React</h1>
+      <ChakraProvider theme={customTheme}>
+      <CSSReset />
+        <Flex justifyContent="center" alignItems="center" height="100%">
+            <Container>
+              <Heading my="30px" color="blue.300">Stay The Course</Heading>
           <p className="description">Sign in via magic link with your email below</p>
           <form className="form-widget" onSubmit={handleLogin}>
             <div>
@@ -49,7 +51,8 @@
               </button>
             </div>
           </form>
-        </div>
-      </div>
+          </Container>
+          </Flex>
+      </ChakraProvider>
     )
   }
