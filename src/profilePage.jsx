@@ -3,7 +3,7 @@ import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
 import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
-import { ArrowBackIcon, EditIcon, CheckIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, CheckIcon } from '@chakra-ui/icons';
 
 const ProfileDetails = ({ label, value, isEditing, onChange }) => {
   if (isEditing) {
@@ -112,15 +112,17 @@ export default function Profile({ session }) {
           onClick={() => navigate('/home')}
         />
         <form onSubmit={updateProfile} className="form-widget">
-          <Text>Profile Photo</Text>
-          <Avatar
-            url={avatar_url}
-            size={150}
-            onUpload={(event, url) => {
-              setAvatarUrl(url);
-              updateProfile(event);
-            }}
-          />
+          <Box my={4} textAlign="center">
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Profile Photo</Text>
+            <Avatar
+              url={avatar_url}
+              size={150}
+              onUpload={(event, url) => {
+                setAvatarUrl(url);
+                updateProfile(event);
+              }}
+            />
+          </Box>
           <ProfileDetails
             label="Email"
             value={session.user.email}
@@ -150,11 +152,7 @@ export default function Profile({ session }) {
                 {loading ? 'Loading ...' : 'Update'}
               </Button>
             ) : (
-              <IconButton
-                aria-label="Edit"
-                icon={<EditIcon />}
-                onClick={() => setIsEditing(true)}
-              />
+              <Button onClick={() => setIsEditing(true)}>Edit</Button>
             )}
             {isEditing && (
               <IconButton
