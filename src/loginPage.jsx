@@ -1,7 +1,7 @@
   import { useState } from 'react'
   import { supabase } from './supabaseClient'
   import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
-  import { useHistory } from 'react-router-dom';
+  import { useNavigate } from 'react-router-dom';
 
   const customTheme = extendTheme({
     fonts: {
@@ -13,7 +13,7 @@
   export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleLogin = async (event) => {
       event.preventDefault()
