@@ -25,7 +25,7 @@
         alert(error.error_description || error.message)
       } else {
         alert('Check your email for the login link!')
-        //history.push('/home');
+        navigate('/home');
       }
       setLoading(false)
     }
