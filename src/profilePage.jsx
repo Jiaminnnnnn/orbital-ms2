@@ -64,13 +64,13 @@ export default function Profile({ session }) {
 
   return (
     <Container centerContent>
-    <Box display="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
       <Flex direction="column" alignItems="center">
         <IconButton
           position="absolute"
           top="0"
           left="0"
           aria-label="Back"
+          size='lg'
           icon={<ArrowBackIcon />}
           onClick={() => navigate('/home')}
         />
@@ -134,7 +134,6 @@ export default function Profile({ session }) {
           </div>
         </form>
       </Flex>
-      </Box>
       </Container>
   );
 }
