@@ -30,6 +30,14 @@
       setLoading(false)
     }
 
+    if (isSent) {
+      return (
+        <div>
+          <h2>Email sent! Check your inbox for the login link.</h2>
+        </div>
+      );
+    }
+
     return (
       <ChakraProvider theme={customTheme}>
       <CSSReset />

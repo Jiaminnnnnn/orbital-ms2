@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Avatar from './Avatar'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import { Select } from '@chakra-ui/react'
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
@@ -60,6 +61,14 @@ export default function Profile({ session }) {
     setLoading(false)
   }
 
+  const handleCourseOfStudyChange = (e) => {
+    setCourseOfStudy(e.target.value);
+  }
+
+  const handleYearOfStudyChange = (e) => {
+    setYearOfStudy(e.target.value);
+  }
+
   return (
     <form onSubmit={updateProfile} className="form-widget">
       <Avatar
@@ -85,6 +94,21 @@ export default function Profile({ session }) {
         />
       </div>
       <div>
+        <label htmlFor="year_of_study">Year Of Study</label>
+        <Select
+          id="year_of_study"
+          type="text"
+          required
+          value={year_of_study || ''}
+          onChange={handleYearOfStudyChange}
+          >
+          <option value="">Select Year of Study</option>
+          <option value="Year 1">Year 1</option>
+          <option value="Year 2">Year 2</option>
+          <option value="Year 3">Year 3</option>
+        </Select>
+      </div>
+      <div>
         <label htmlFor="course_of_study">Course Of Study</label>
         <input
           id="course_of_study"
@@ -95,16 +119,6 @@ export default function Profile({ session }) {
         />
       </div>
       <div>
-        <label htmlFor="year_of_study">Year Of Study</label>
-        <input
-          id="year_of_study"
-          type="text"
-          required
-          value={year_of_study || ''}
-          onChange={(e) => setYearOfStudy(e.target.value)}
-        />
-      </div>
-      <div>
         <button className="button block primary" type="submit" disabled={loading}>
           {loading ? 'Loading ...' : 'Update'}
         </button>
@@ -112,12 +126,12 @@ export default function Profile({ session }) {
 
       <div>
         <button className="button block" type="button" onClick={() => supabase.auth.signOut()}>
-          Sign Out
+          Log out
         </button>
       </div>
       <div>
         <button className="button block" type="button" onClick={() => navigate('/home')}>
-          Return to Home
+          Back
         </button>
         </div>
     </form>
