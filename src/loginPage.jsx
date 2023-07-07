@@ -31,7 +31,6 @@ export default function Auth() {
     <ChakraProvider theme={customTheme}>
       <CSSReset />
         <Flex justifyContent="center" alignItems="center" height="100%">
-          <Box bg="gray.200" p="20px" width="400px">
             <Container>
               <Heading my="30px" color="blue.300">Stay The Course</Heading>
               <Flex flexDirection="column" alignItems="center">
@@ -54,7 +53,6 @@ export default function Auth() {
                 </Button>
               </Flex>
             </Container>
-          </Box>
         </Flex>
     </ChakraProvider>
   )

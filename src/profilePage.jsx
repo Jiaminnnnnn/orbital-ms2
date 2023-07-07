@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
+  const [courseOfStudy, setCourseOfStudy] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Profile({ session }) {
 
       let { data, error } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`username, course_of_study, avatar_url`)
         .eq('id', user.id)
         .single()
 
@@ -23,7 +23,7 @@ export default function Profile({ session }) {
         console.warn(error)
       } else if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
+        setCourseOfStudy(data.course_of_study)
         setAvatarUrl(data.avatar_url)
       }
 
