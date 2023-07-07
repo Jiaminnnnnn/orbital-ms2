@@ -3,19 +3,26 @@ import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
 import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, EditIcon, CheckIcon } from '@chakra-ui/icons';
 
-const ProfileDetails = ({ email, username, yearOfStudy, courseOfStudy }) => {
+const ProfileDetails = ({ label, value, isEditing, onChange }) => {
+  if (isEditing) {
+    return (
+      <Box my={4} textAlign="center">
+        <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+        />
+      </Box>
+    );
+  }
+
   return (
     <Box my={4} textAlign="center">
-      <Text fontSize="lg" fontWeight="bold" mb={2}>Email</Text>
-      <Text>{email}</Text>
-      <Text fontSize="lg" fontWeight="bold" mb={2}>Username</Text>
-      <Text>{username}</Text>
-      <Text fontSize="lg" fontWeight="bold" mb={2}>Year of Study</Text>
-      <Text>{yearOfStudy}</Text>
-      <Text fontSize="lg" fontWeight="bold" mb={2}>Course of Study</Text>
-      <Text>{courseOfStudy}</Text>
+      <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+      <Text>{value}</Text>
     </Box>
   );
 };
@@ -26,7 +33,7 @@ export default function Profile({ session }) {
   const [course_of_study, setCourseOfStudy] = useState(null);
   const [year_of_study, setYearOfStudy] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
-  const [isUpdated, setIsUpdated] = useState(false); // Track update status
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,10 +82,22 @@ export default function Profile({ session }) {
     if (error) {
       alert(error.message);
     } else {
-      setIsUpdated(true); // Set update status to true
+      setIsEditing(false);
     }
     setLoading(false);
   }
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleCourseOfStudyChange = (event) => {
+    setCourseOfStudy(event.target.value);
+  };
+
+  const handleYearOfStudyChange = (event) => {
+    setYearOfStudy(event.target.value);
+  };
 
   return (
     <Container centerContent minHeight="100vh">
@@ -103,21 +122,48 @@ export default function Profile({ session }) {
             }}
           />
           <ProfileDetails
-            email={session.user.email}
-            username={username}
-            yearOfStudy={year_of_study}
-            courseOfStudy={course_of_study}
+            label="Email"
+            value={session.user.email}
+            isEditing={false}
+          />
+          <ProfileDetails
+            label="Username"
+            value={username}
+            isEditing={isEditing}
+            onChange={handleUsernameChange}
+          />
+          <ProfileDetails
+            label="Year of Study"
+            value={year_of_study}
+            isEditing={isEditing}
+            onChange={handleYearOfStudyChange}
+          />
+          <ProfileDetails
+            label="Course of Study"
+            value={course_of_study}
+            isEditing={isEditing}
+            onChange={handleCourseOfStudyChange}
           />
           <Box my={4} textAlign="center">
-            <Button type="submit" disabled={loading}>
-              {loading ? 'Loading ...' : 'Update'}
-            </Button>
+            {isEditing ? (
+              <Button type="submit" disabled={loading}>
+                {loading ? 'Loading ...' : 'Update'}
+              </Button>
+            ) : (
+              <IconButton
+                aria-label="Edit"
+                icon={<EditIcon />}
+                onClick={() => setIsEditing(true)}
+              />
+            )}
+            {isEditing && (
+              <IconButton
+                aria-label="Save"
+                icon={<CheckIcon />}
+                onClick={() => setIsEditing(false)}
+              />
+            )}
           </Box>
-          {isUpdated && (
-            <Box my={4} textAlign="center">
-              <Text>Profile updated successfully!</Text>
-            </Box>
-          )}
           <Box my={4} textAlign="center">
             <Button onClick={() => supabase.auth.signOut()}>Log out</Button>
           </Box>
