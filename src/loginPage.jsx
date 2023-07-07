@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
         return (
           <ChakraProvider theme={customTheme}>
           <CSSReset />
-            <Flex justifyContent="center" alignItems="center" height="100%">
+            <Flex justifyContent="center" alignItems="center">
                 <Container>
                 <Flex flexDirection="column" alignItems="center">
                   <Heading my="30px" color="blue.300">Stay The Course</Heading>
