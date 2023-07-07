@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, FormControl, FormLabel, Input, Flex, Box } from '@chakra-ui/react';
+import { Select, Button, ArrowBackIcon } from '@chakra-ui/react';
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true);
@@ -63,14 +63,24 @@ export default function Profile({ session }) {
 
   return (
     <form onSubmit={updateProfile} className="form-widget"> 
-     <Avatar
-      url={avatar_url}
-      size={150}
-      onUpload={(event, url) => {
-        setAvatarUrl(url)
-        updateProfile(event)
-      }}
-    />
+      <Box position="relative">
+        <Avatar
+          url={avatar_url}
+          size={150}
+          onUpload={(event, url) => {
+            setAvatarUrl(url)
+            updateProfile(event)
+          }}
+        />
+        <IconButton
+          position="absolute"
+          top="0"
+          left="0"
+          aria-label="Back"
+          icon={<ArrowBackIcon />}
+          onClick={() => navigate('/home')}
+        />
+      </Box>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -118,11 +128,6 @@ export default function Profile({ session }) {
       <div>
         <Button className="button block" onClick={() => supabase.auth.signOut()}>
           Log out
-        </Button>
-      </div>
-      <div>
-        <Button className="button block" onClick={() => navigate('/home')}>
-          Back
         </Button>
       </div>
     </form>
