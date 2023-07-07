@@ -150,10 +150,18 @@ export default function Profile({ session }) {
                 {loading ? 'Loading ...' : 'Update'}
               </Button>
             ) : (
-              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+              <IconButton
+                aria-label="Edit"
+                icon={<EditIcon />}
+                onClick={() => setIsEditing(true)}
+              />
             )}
             {isEditing && (
-               <Button onClick={() => setIsEditing(false)}>Save</Button>
+              <IconButton
+                aria-label="Save"
+                icon={<CheckIcon />}
+                onClick={() => setIsEditing(false)}
+              />
             )}
           </Box>
           <Box my={4} textAlign="center">
