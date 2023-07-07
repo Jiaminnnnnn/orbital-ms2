@@ -21,7 +21,7 @@ function App() {
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       <Router>
         <Routes>
-          <Route path="/" element={!session ? <Login /> : <HomePage />} />
+          <Route path="/" element={!session ? <Login /> : <Home />} />
           <Route path="/profile" element={session ? <Profile key={session.user.id} session={session} /> : <Login />} />
         </Routes>
       </Router>
