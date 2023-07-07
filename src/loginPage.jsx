@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
+import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset, Stack, Center } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 
 const customTheme = extendTheme({
@@ -33,6 +33,8 @@ export default function Login() {
   
   return (
     <ChakraProvider theme={customTheme}>
+      <Center h="100vh" bg="blue.300">
+        <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
     <CSSReset />
       <Flex justifyContent="center" alignItems="center" height="100%">
           <Container>
@@ -61,6 +63,8 @@ export default function Login() {
         </form>
         </Container>
         </Flex>
+        </Stack>
+        </Center>
     </ChakraProvider>
   )
 } 
