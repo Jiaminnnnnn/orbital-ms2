@@ -1,7 +1,7 @@
-  import { useState } from 'react'
+  import { useState, useEffect } from 'react'
   import { supabase } from './supabaseClient'
   import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
-  import { useNavigate, useEffect } from 'react-router-dom';
+  import { useNavigate } from 'react-router-dom';
 
   const customTheme = extendTheme({
     fonts: {
