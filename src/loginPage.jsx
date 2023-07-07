@@ -1,6 +1,7 @@
   import { useState } from 'react'
   import { supabase } from './supabaseClient'
   import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, CSSReset } from "@chakra-ui/react";
+  import { useHistory } from 'react-router-dom';
 
   const customTheme = extendTheme({
     fonts: {
@@ -24,7 +25,7 @@
         alert(error.error_description || error.message)
       } else {
         alert('Check your email for the login link!')
-        history.pushState('/home');
+        history.push('/home');
       }
       setLoading(false)
     }
