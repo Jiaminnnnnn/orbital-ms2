@@ -42,6 +42,14 @@ export default function Login() {
     handleSession();
   }, [navigate]);
 
+  if (loading) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
   if (isSent) {
     return (
       <div>
