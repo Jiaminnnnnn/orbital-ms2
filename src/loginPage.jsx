@@ -33,7 +33,7 @@ export default function Login() {
   
   return (
     <ChakraProvider theme={customTheme}>
-    <Center h="1000vh" bg="blue.300">
+    <body class="bg-blue-300 text-center">
     <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
     <CSSReset />
       <Flex justifyContent="center" alignItems="center" height="100%">
@@ -64,7 +64,7 @@ export default function Login() {
         </Container>
         </Flex>
         </Stack>
-        </Center>
+        </body>
         </ChakraProvider>
   )
 }
