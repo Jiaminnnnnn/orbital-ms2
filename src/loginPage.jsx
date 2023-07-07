@@ -31,7 +31,7 @@
 
     useEffect(() => {
       const handleSession = async () => {
-        const user = supabase.auth.getUser();
+        const user = supabase.auth.user();
   
         if (user) {
           navigate('/home');
