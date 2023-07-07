@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <ChakraProvider theme={customTheme}>
       <Flex height="100vh" alignItems="center" justifyContent="center">
-        <Stack spacing={4} p={4} bg="whiteAlpha.900" rounded="md">
+      <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
           <Container maxW="sm">
             <Heading my="30px" color="blue.300">
               Stay The Course
