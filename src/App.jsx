@@ -23,14 +23,14 @@ function App() {
     <ChakraProvider>
       <div className="container" style={{ padding: '50px 0 100px 0' }}>
         <Router>
-          <Switch>
+          <Routes>
             <Route exact path="/">
               {!session ? <Login /> : <Profile key={session.user.id} session={session} />}
             </Route>
             <Route path="/profile">
               <Profile key={session?.user.id} session={session} />
             </Route>
-          </Switch>
+          </Routes>
         </Router>
       </div>
     </ChakraProvider>
