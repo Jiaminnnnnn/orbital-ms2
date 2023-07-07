@@ -26,6 +26,7 @@ export default function Profile({ session }) {
   const [course_of_study, setCourseOfStudy] = useState(null);
   const [year_of_study, setYearOfStudy] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const [isUpdated, setIsUpdated] = useState(false); // Track update status
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,6 +74,8 @@ export default function Profile({ session }) {
 
     if (error) {
       alert(error.message);
+    } else {
+      setIsUpdated(true); // Set update status to true
     }
     setLoading(false);
   }
@@ -110,6 +113,11 @@ export default function Profile({ session }) {
               {loading ? 'Loading ...' : 'Update'}
             </Button>
           </Box>
+          {isUpdated && (
+            <Box my={4} textAlign="center">
+              <Text>Profile updated successfully!</Text>
+            </Box>
+          )}
           <Box my={4} textAlign="center">
             <Button onClick={() => supabase.auth.signOut()}>Log out</Button>
           </Box>
