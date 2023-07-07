@@ -162,9 +162,7 @@ export default function Profile({ session }) {
                 {loading ? 'Loading ...' : 'Update'}
               </Button>
             ) : (
-              <Button onClick={() => setIsEditing(true)}>
-                {loading ? 'Loading ...' : 'Edit'}
-              </Button>
+              <Button onClick={() => setIsEditing(true)}>Edit</Button>
             )}
             {isEditing && (
               <IconButton
