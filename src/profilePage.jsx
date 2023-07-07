@@ -7,26 +7,16 @@ import { ArrowBackIcon, EditIcon, CheckIcon } from '@chakra-ui/icons';
 
 const ProfileDetails = ({ label, value, isEditing, onChange }) => {
   if (isEditing) {
-    if (label === 'Year of Study') {
-      return (
-        <Box my={4} textAlign="center">
-          <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
-          <Select value={value} onChange={onChange}>
-            <option value="Year 1">Year 1</option>
-            <option value="Year 2">Year 2</option>
-            <option value="Year 3">Year 3</option>
-            <option value="Year 4">Year 4</option>
-          </Select>
-        </Box>
-      );
-    } else {
-      return (
-        <Box my={4} textAlign="center">
-          <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
-          <input type="text" value={value} onChange={onChange} />
-        </Box>
-      );
-    }
+    return (
+      <Box my={4} textAlign="center">
+        <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+        />
+      </Box>
+    );
   }
 
   return (
@@ -38,7 +28,7 @@ const ProfileDetails = ({ label, value, isEditing, onChange }) => {
 };
 
 export default function Profile({ session }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [course_of_study, setCourseOfStudy] = useState(null);
   const [year_of_study, setYearOfStudy] = useState(null);
@@ -122,17 +112,15 @@ export default function Profile({ session }) {
           onClick={() => navigate('/home')}
         />
         <form onSubmit={updateProfile} className="form-widget">
-          <Box my={4} textAlign="center">
-            <Text fontSize="lg" fontWeight="bold" mb={2}>Profile Photo</Text>
-            <Avatar
-              url={avatar_url}
-              size={150}
-              onUpload={(event, url) => {
-                setAvatarUrl(url);
-                updateProfile(event);
-              }}
-            />
-          </Box>
+          <Text>Profile Photo</Text>
+          <Avatar
+            url={avatar_url}
+            size={150}
+            onUpload={(event, url) => {
+              setAvatarUrl(url);
+              updateProfile(event);
+            }}
+          />
           <ProfileDetails
             label="Email"
             value={session.user.email}
@@ -165,7 +153,7 @@ export default function Profile({ session }) {
               <Button onClick={() => setIsEditing(true)}>Edit</Button>
             )}
             {isEditing && (
-              <Button onClick={() => setIsEditing(false)}>Save</Button>
+               <Button onClick={() => setIsEditing(false)}>Save</Button>
             )}
           </Box>
           <Box my={4} textAlign="center">
