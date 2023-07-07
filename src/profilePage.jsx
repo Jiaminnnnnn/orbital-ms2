@@ -3,21 +3,30 @@ import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
 import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
-import { ArrowBackIcon, CheckIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, EditIcon, CheckIcon } from '@chakra-ui/icons';
 
 const ProfileDetails = ({ label, value, isEditing, onChange }) => {
   if (isEditing) {
-    return (
-      <Box my={4} textAlign="center">
-        <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
-        <Select value={value} onChange={onChange}>
-          <option value="Year 1">Year 1</option>
-          <option value="Year 2">Year 2</option>
-          <option value="Year 3">Year 3</option>
-          <option value="Year 4">Year 4</option>
-        </Select>
-      </Box>
-    );
+    if (label === 'Year of Study') {
+      return (
+        <Box my={4} textAlign="center">
+          <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+          <Select value={value} onChange={onChange}>
+            <option value="Year 1">Year 1</option>
+            <option value="Year 2">Year 2</option>
+            <option value="Year 3">Year 3</option>
+            <option value="Year 4">Year 4</option>
+          </Select>
+        </Box>
+      );
+    } else {
+      return (
+        <Box my={4} textAlign="center">
+          <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+          <input type="text" value={value} onChange={onChange} />
+        </Box>
+      );
+    }
   }
 
   return (
@@ -29,7 +38,7 @@ const ProfileDetails = ({ label, value, isEditing, onChange }) => {
 };
 
 export default function Profile({ session }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState(null);
   const [course_of_study, setCourseOfStudy] = useState(null);
   const [year_of_study, setYearOfStudy] = useState(null);
@@ -102,7 +111,7 @@ export default function Profile({ session }) {
 
   return (
     <Container centerContent minHeight="100vh">
-      <Flex direction="column" alignItems="center" justify="center" height="100%">
+      <Flex direction="column" alignItems="center" justify="center">
         <IconButton
           position="absolute"
           top="1rem"
@@ -153,7 +162,9 @@ export default function Profile({ session }) {
                 {loading ? 'Loading ...' : 'Update'}
               </Button>
             ) : (
-              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+              <Button onClick={() => setIsEditing(true)}>
+                {loading ? 'Loading ...' : 'Edit'}
+              </Button>
             )}
             {isEditing && (
               <IconButton
