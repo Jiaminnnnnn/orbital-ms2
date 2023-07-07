@@ -64,16 +64,14 @@ export default function Profile({ session }) {
 
   return (
     <Container centerContent>
-      <Flex direction="column" alignItems="center">
-        <IconButton
-          position="absolute"
-          top="0"
-          left="0"
-          aria-label="Back"
-          size='lg'
-          icon={<ArrowBackIcon />}
-          onClick={() => navigate('/home')}
-        />
+      <Box height="100vh" display="flex" alignItems="center">
+        <Box position="absolute" top="0" left="0">
+          <IconButton
+            aria-label="Back"
+            icon={<ArrowBackIcon />}
+            onClick={() => navigate('/home')}
+          />
+        </Box>
         <form onSubmit={updateProfile} className="form-widget">
           <Avatar
             url={avatar_url}
@@ -133,7 +131,7 @@ export default function Profile({ session }) {
             </Button>
           </div>
         </form>
-      </Flex>
-      </Container>
+      </Box>
+    </Container>
   );
 }
