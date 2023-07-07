@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Button, VStack, Heading, Text, Flex, Box, useColorModeValue } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  'https://jktiyufbqkbomnsychbf.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprdGl5dWZicWtib21uc3ljaGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODY5NzM4NDcsImV4cCI6MjAwMjU0OTg0N30.Pd6CPCGtJsRRZCnOlY9-VrVE_y6aYZP7_LNPsBqBris'
-);
+import { supabase } from '../supabaseClient';
 
 function Home() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const colorScheme = useColorModeValue('green', 'gray');
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,20 +20,31 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Home Page</h1>
-      {user ? (
-        <div>
-          <Link to="/profile">Profile</Link>
-        </div>
-      ) : (
-        <div>
-          <h3>Sign In to Continue</h3>
-          <p>You need to sign in to access the home page.</p>
-          <button onClick={() => navigate('/login')}>Sign In</button>
-        </div>
-      )}
-    </div>
+    <Flex alignItems="center" justifyContent="center" minH="100vh">
+      <Box w={["90%", "80%", "60%", "40%"]}>
+        <VStack spacing={6} p={8} boxShadow="lg" borderRadius="md" backgroundColor={useColorModeValue('gray.100', 'gray.700')}>
+          <Heading as="h2" size="xl">
+            Home Page
+          </Heading>
+          {user ? (
+            <VStack spacing={4} align="stretch">
+              <Link to="/profile">Profile</Link>
+              <Button colorScheme={colorScheme} onClick={() => navigate('/gateway')}>
+                Find/Apply Tutor
+              </Button>
+            </VStack>
+          ) : (
+            <VStack spacing={4} align="stretch">
+              <Heading as="h4" size="md">Sign In to Continue</Heading>
+              <Text>You need to sign in to access the home page.</Text>
+              <Button colorScheme={colorScheme} onClick={() => navigate('/login')}>
+                Sign In
+              </Button>
+            </VStack>
+          )}
+        </VStack>
+      </Box>
+    </Flex>
   );
 }
 
