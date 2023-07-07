@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-      <Center height="100vh">
+      <Center>
         <Container>
           <Heading my="30px" color="blue.300">
             Stay The Course
