@@ -19,16 +19,25 @@ function App() {
     })
   }, [])
 
+  const handleLoginSuccess = () => {
+    setSession(true);
+  };
+
+  const handleLogout = () => {
+    setSession(null);
+  };
+
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       <Router>
         <Routes>
-          <Route path="/" element={!session ? <Login /> : <Home />} />
-          <Route path="/profile" element={session ? <Profile key={session.user.id} session={session} /> : <Login />} />
+          <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+          <Route path="/home" element={<HomePage session={session} />} />
+          <Route path="/profile" element={<Profile session={session} />} />
         </Routes>
       </Router>
     </div>
-  )
+  );
 }
 
 export default App
