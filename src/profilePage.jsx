@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Avatar from './Avatar'
 import { useNavigate } from 'react-router-dom'
-import { Select } from '@chakra-ui/react'
+import { Select, Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
@@ -61,24 +61,19 @@ export default function Profile({ session }) {
     setLoading(false)
   }
 
-  const handleCourseOfStudyChange = (e) => {
-    setCourseOfStudy(e.target.value);
-  }
-
-  const handleYearOfStudyChange = (e) => {
-    setYearOfStudy(e.target.value);
+  const handleAvatarUpload = (event) => {
+    const file = event.target.files[0]
+    const fileUrl = URL.createObjectURL(file)
+    setAvatarUrl(fileUrl)
   }
 
   return (
     <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <Avatar
-        url={avatar_url}
-        size={150}
-        onUpload={(event, url) => {
-          setAvatarUrl(url)
-          updateProfile(event)
-        }}
-      />
+      <FormControl>
+        <Avatar url={avatar_url} size={150} onUpload={handleAvatarUpload} />
+        <FormLabel htmlFor="avatar">Profile Photo</FormLabel>
+        <Input type="file" id="avatar" accept="image/*" onChange={handleAvatarUpload} />
+      </FormControl>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -100,7 +95,7 @@ export default function Profile({ session }) {
           type="text"
           required
           value={year_of_study || ''}
-          onChange={handleYearOfStudyChange}
+          onChange={(e) => setYearOfStudy(e.target.value)}
         >
           <option value="">Select Year of Study</option>
           <option value="Year 1">Year 1</option>
@@ -119,20 +114,20 @@ export default function Profile({ session }) {
         />
       </div>
       <div>
-        <button className="button block primary" type="submit" disabled={loading}>
+        <Button className="button block primary" type="submit" disabled={loading}>
           {loading ? 'Loading ...' : 'Update'}
-        </button>
+        </Button>
       </div>
 
       <div>
-        <button className="button block" type="button" onClick={() => supabase.auth.signOut()}>
+        <Button className="button block" onClick={() => supabase.auth.signOut()}>
           Log out
-        </button>
+        </Button>
       </div>
       <div>
-        <button className="button block" type="button" onClick={() => navigate('/home')}>
+        <Button className="button block" onClick={() => navigate('/home')}>
           Back
-        </button>
+        </Button>
       </div>
     </form>
   )
