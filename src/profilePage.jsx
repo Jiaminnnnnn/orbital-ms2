@@ -1,48 +1,48 @@
-import { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import Avatar from './Avatar'
-import { useNavigate } from 'react-router-dom'
-import { Select, Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { useState, useEffect } from 'react';
+import { supabase } from './supabaseClient';
+import Avatar from './Avatar';
+import { useNavigate } from 'react-router-dom';
+import { Select, Button, FormControl, FormLabel, Input, Flex, Box } from '@chakra-ui/react';
 
 export default function Profile({ session }) {
-  const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState(null)
-  const [course_of_study, setCourseOfStudy] = useState(null)
-  const [year_of_study, setYearOfStudy] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState(null);
+  const [course_of_study, setCourseOfStudy] = useState(null);
+  const [year_of_study, setYearOfStudy] = useState(null);
+  const [avatar_url, setAvatarUrl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getProfile() {
-      setLoading(true)
-      const { user } = session
+      setLoading(true);
+      const { user } = session;
 
       let { data, error } = await supabase
         .from('profiles')
         .select(`username, course_of_study, year_of_study, avatar_url`)
         .eq('id', user.id)
-        .single()
+        .single();
 
       if (error) {
-        console.warn(error)
+        console.warn(error);
       } else if (data) {
-        setUsername(data.username)
-        setCourseOfStudy(data.course_of_study)
-        setYearOfStudy(data.year_of_study)
-        setAvatarUrl(data.avatar_url)
+        setUsername(data.username);
+        setCourseOfStudy(data.course_of_study);
+        setYearOfStudy(data.year_of_study);
+        setAvatarUrl(data.avatar_url);
       }
 
-      setLoading(false)
+      setLoading(false);
     }
 
-    getProfile()
-  }, [session])
+    getProfile();
+  }, [session]);
 
   async function updateProfile(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    setLoading(true)
-    const { user } = session
+    setLoading(true);
+    const { user } = session;
 
     const updates = {
       id: user.id,
@@ -51,29 +51,31 @@ export default function Profile({ session }) {
       year_of_study,
       avatar_url,
       updated_at: new Date(),
-    }
+    };
 
-    let { error } = await supabase.from('profiles').upsert(updates)
+    let { error } = await supabase.from('profiles').upsert(updates);
 
     if (error) {
-      alert(error.message)
+      alert(error.message);
     }
-    setLoading(false)
+    setLoading(false);
   }
 
   const handleAvatarUpload = (event) => {
-    const file = event.target.files[0]
-    const fileUrl = URL.createObjectURL(file)
-    setAvatarUrl(fileUrl)
-  }
+    const file = event.target.files[0];
+    const fileUrl = URL.createObjectURL(file);
+    setAvatarUrl(fileUrl);
+  };
 
   return (
     <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <FormControl>
-        <Avatar url={avatar_url} size={150} onUpload={handleAvatarUpload} />
-        <FormLabel htmlFor="avatar">Profile Photo</FormLabel>
-        <Input type="file" id="avatar" accept="image/*" onChange={handleAvatarUpload} />
-      </FormControl>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <FormControl>
+          <FormLabel htmlFor="avatar">Profile Photo</FormLabel>
+          <Input type="file" id="avatar" accept="image/*" onChange={handleAvatarUpload} />
+        </FormControl>
+        <Avatar url={avatar_url} size={150} onUpload={handleAvatarUpload} clickable />
+      </Box>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -130,5 +132,5 @@ export default function Profile({ session }) {
         </Button>
       </div>
     </form>
-  )
+  );
 }
