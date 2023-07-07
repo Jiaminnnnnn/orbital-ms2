@@ -61,12 +61,6 @@ export default function Profile({ session }) {
     setLoading(false);
   }
 
-  const handleAvatarUpload = (event) => {
-    const file = event.target.files[0];
-    const fileUrl = URL.createObjectURL(file);
-    setAvatarUrl(fileUrl);
-  };
-
   return (
     <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <Box display="flex" alignItems="center" justifyContent="center">
@@ -74,7 +68,15 @@ export default function Profile({ session }) {
           <FormLabel htmlFor="avatar">Profile Photo</FormLabel>
           <Input type="file" id="avatar" accept="image/*" onChange={handleAvatarUpload} />
         </FormControl>
-        <Avatar url={avatar_url} size={150} onUpload={handleAvatarUpload} clickable />
+        <Avatar
+      url={avatar_url}
+      size={150}
+      onUpload={(event, url) => {
+        setAvatarUrl(url)
+        updateProfile(event)
+      }}
+    />
+
       </Box>
       <div>
         <label htmlFor="email">Email</label>
