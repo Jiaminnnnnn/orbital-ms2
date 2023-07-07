@@ -112,7 +112,8 @@ export default function Profile({ session }) {
           onClick={() => navigate('/home')}
         />
         <form onSubmit={updateProfile} className="form-widget">
-          <Text>Profile Photo</Text>
+        <ProfileDetails
+        label="Profile Photo"/>
           <Avatar
             url={avatar_url}
             size={150}
