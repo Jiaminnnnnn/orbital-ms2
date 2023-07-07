@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const customTheme = extendTheme({
   styles: {
+    body: {
     bg: 'blue.300',
+    }
   }, 
   fonts: {
     body: 'Georgia, sans-serif',
