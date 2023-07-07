@@ -10,11 +10,12 @@ const ProfileDetails = ({ label, value, isEditing, onChange }) => {
     return (
       <Box my={4} textAlign="center">
         <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
-        <input
-          type="text"
-          value={value}
-          onChange={onChange}
-        />
+        <Select value={value} onChange={onChange}>
+          <option value="Year 1">Year 1</option>
+          <option value="Year 2">Year 2</option>
+          <option value="Year 3">Year 3</option>
+          <option value="Year 4">Year 4</option>
+        </Select>
       </Box>
     );
   }
@@ -101,7 +102,7 @@ export default function Profile({ session }) {
 
   return (
     <Container centerContent minHeight="100vh">
-      <Flex direction="column" alignItems="center" justify="center">
+      <Flex direction="column" alignItems="center" justify="center" height="100%">
         <IconButton
           position="absolute"
           top="1rem"
