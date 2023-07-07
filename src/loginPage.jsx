@@ -6,8 +6,7 @@ const customTheme = extendTheme({
   styles: {
     global: {
       body: {
-        backgroundColor: 'blue.300',
-        color: 'white',
+        backgroundColor: 'blue.300'
       },
     },
   },
@@ -26,21 +25,27 @@ export default function Login() {
     event.preventDefault();
 
     setLoading(true);
-    // Your authentication logic here
+    const { error } = await supabase.auth.signInWithOtp({ email });
 
+    if (error) {
+      alert(error.error_description || error.message);
+    } else {
+      alert('Check your email for the login link!');
+      navigate('/home');
+    }
     setLoading(false);
   };
 
   return (
     <ChakraProvider theme={customTheme}>
       <Flex height="100vh" alignItems="center" justifyContent="center">
-      <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
+        <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
           <Container maxW="sm">
             <Heading my="30px" color="blue.300">
               Stay The Course
             </Heading>
             <Flex flexDirection="column" alignItems="center">
-              <Text fontWeight="bold" marginBottom="10px" fontFamily="heading">
+              <Text color='gray' marginBottom="10px" fontFamily="heading">
                 Sign in via magic link with your email below
               </Text>
             </Flex>
