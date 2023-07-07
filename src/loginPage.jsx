@@ -12,6 +12,7 @@
   export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
+    const history = useHistory();
 
     const handleLogin = async (event) => {
       event.preventDefault()
@@ -23,6 +24,7 @@
         alert(error.error_description || error.message)
       } else {
         alert('Check your email for the login link!')
+        history.pushState('/home');
       }
       setLoading(false)
     }
