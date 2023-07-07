@@ -1,30 +1,25 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './loginPage';
-import Profile from './profilePage';
 import Home from './homePage';
+import Profile from './profilePage';
+import { supabase } from './supabaseClient';
 
 function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+    const { data: session } = supabase.auth.getSession();
+    setSession(session);
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
-  const handleLoginSuccess = () => {
-    setSession(true);
-  };
-
-  const handleLogout = () => {
-    setSession(null);
-  };
-
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
@@ -32,33 +27,15 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              session ? (
-                <Navigate to="/home" />
-              ) : (
-                <Login onLoginSuccess={handleLoginSuccess} />
-              )
-            }
+            element={session ? <Navigate to="/home" /> : <Login />}
           />
           <Route
             path="/home"
-            element={
-              session ? (
-                <Home />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
+            element={session ? <Home /> : <Navigate to="/" />}
           />
           <Route
             path="/profile"
-            element={
-              session ? (
-                <Profile onLogout={handleLogout} />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
+            element={session ? <Profile session={session} /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>
@@ -67,4 +44,3 @@ function App() {
 }
 
 export default App;
-
