@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Avatar from './Avatar'
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
@@ -8,6 +9,7 @@ export default function Profile({ session }) {
   const [course_of_study, setCourseOfStudy] = useState(null)
   const [year_of_study, setYearOfStudy] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getProfile() {
@@ -113,6 +115,11 @@ export default function Profile({ session }) {
           Sign Out
         </button>
       </div>
+      <div>
+        <button className="button block" type="button" onClick={() => navigate('/home')}>
+          Return to Home
+        </button>
+        </div>
     </form>
   )
 }
