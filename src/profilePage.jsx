@@ -62,9 +62,8 @@ export default function Profile({ session }) {
   }
 
   return (
-    <form onSubmit={updateProfile} className="form-widget" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <Avatar
+    <form onSubmit={updateProfile} className="form-widget"> 
+     <Avatar
       url={avatar_url}
       size={150}
       onUpload={(event, url) => {
@@ -72,8 +71,6 @@ export default function Profile({ session }) {
         updateProfile(event)
       }}
     />
-
-      </Box>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -118,7 +115,6 @@ export default function Profile({ session }) {
           {loading ? 'Loading ...' : 'Update'}
         </Button>
       </div>
-
       <div>
         <Button className="button block" onClick={() => supabase.auth.signOut()}>
           Log out
