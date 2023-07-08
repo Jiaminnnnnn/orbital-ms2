@@ -2,19 +2,11 @@ import { useState } from 'react';
 import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, Stack } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseClient';
- 
 
 const customTheme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        backgroundColor: 'blue.300'
-      },
-    },
-  },
   fonts: {
     body: 'Georgia, sans-serif',
-    heading: 'Georgia, serif',
+    heading: 'Comic Sans MS, Comic Sans MS',
   },
 });
 
@@ -40,19 +32,26 @@ export default function Login() {
 
   return (
     <ChakraProvider theme={customTheme}>
-      <Flex height="100vh" alignItems="center" justifyContent="center">
-        <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
+      <Flex height="100%" width="100%" position="fixed" alignItems="center" justifyContent="center" bg="lightblue">
+        <Stack
+          boxShadow="md"
+          bg="whiteAlpha.900"
+          p="20"
+          rounded="md"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Container maxW="sm">
-            <Heading my="30px" color="blue.300">
+            <Heading my="30px" color="blue.300" fontFamily="heading">
               Stay The Course
             </Heading>
             <Flex flexDirection="column" alignItems="center">
-              <Text color='gray' marginBottom="10px" fontFamily="heading">
+              <Text marginBottom="10px" fontFamily="body">
                 Sign in via magic link with your email below
               </Text>
             </Flex>
             <form onSubmit={handleLogin} style={{ textAlign: 'center' }}>
-              <Box marginBottom="20px">
+              <Box marginBottom="20px" borderColor="blue.300">
                 <Input
                   type="email"
                   placeholder="Your email"
@@ -61,7 +60,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Box>
-              <Button type="submit" disabled={loading}>
+              <Button type="submit" disabled={loading} fontWeight="light" fontSize='15px' colorScheme="blue">
                 {loading ? 'Loading' : 'Send magic link'}
               </Button>
             </form>

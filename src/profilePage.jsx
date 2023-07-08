@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import { useNavigate } from 'react-router-dom';
-import { Select, Button, Flex, IconButton, Box, Container, Text } from '@chakra-ui/react';
-import { ArrowBackIcon, CheckIcon } from '@chakra-ui/icons';
+import { Select, Button, Flex, IconButton, Box, Text } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 const ProfileDetails = ({ label, value, isEditing, onChange }) => {
   if (isEditing) {
     return (
       <Box my={4} textAlign="center">
-        <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+        <Text fontSize="lg" fontWeight="bold">{label}</Text>
         <input
           type="text"
           value={value}
@@ -21,7 +21,7 @@ const ProfileDetails = ({ label, value, isEditing, onChange }) => {
 
   return (
     <Box my={4} textAlign="center">
-      <Text fontSize="lg" fontWeight="bold" mb={2}>{label}</Text>
+      <Text fontSize="lg" fontWeight="bold">{label}</Text>
       <Text>{value}</Text>
     </Box>
   );
@@ -100,73 +100,90 @@ export default function Profile({ session }) {
   };
 
   return (
-    <Container centerContent minHeight="100vh">
-      <Flex direction="column" alignItems="center" justify="center">
+    <Flex height="100vh" width="100vw" justifyContent="center" bg="lightblue">
+      <Flex position="absolute" top={0} left={0} right={0} bottom={0} justifyContent="center" alignItems="center" bg="lightblue">
         <IconButton
           position="absolute"
           top="1rem"
           left="1rem"
-          aria-label="Back"
           size="lg"
+          aria-label="Back"
           icon={<ArrowBackIcon />}
           onClick={() => navigate('/home')}
         />
-        <form onSubmit={updateProfile} className="form-widget">
-          <Box my={4} textAlign="center">
-            <Text fontSize="lg" fontWeight="bold" mb={2}>Profile Photo</Text>
+        <Flex direction="column" alignItems="center" justify="center">
+          <form onSubmit={updateProfile} className="form-widget">
+            <ProfileDetails
+              label="Profile Photo"
+            />
             <Avatar
               url={avatar_url}
-              size={150}
+              size={80}
               onUpload={(event, url) => {
                 setAvatarUrl(url);
                 updateProfile(event);
               }}
             />
-          </Box>
-          <ProfileDetails
-            label="Email"
-            value={session.user.email}
-            isEditing={false}
-          />
-          <ProfileDetails
-            label="Username"
-            value={username}
-            isEditing={isEditing}
-            onChange={handleUsernameChange}
-          />
-          <ProfileDetails
-            label="Year of Study"
-            value={year_of_study}
-            isEditing={isEditing}
-            onChange={handleYearOfStudyChange}
-          />
-          <ProfileDetails
-            label="Course of Study"
-            value={course_of_study}
-            isEditing={isEditing}
-            onChange={handleCourseOfStudyChange}
-          />
-          <Box my={4} textAlign="center">
-            {isEditing ? (
-              <Button type="submit" disabled={loading}>
-                {loading ? 'Loading ...' : 'Update'}
-              </Button>
-            ) : (
-              <Button onClick={() => setIsEditing(true)}>Edit</Button>
-            )}
-            {isEditing && (
-              <IconButton
-                aria-label="Save"
-                icon={<CheckIcon />}
-                onClick={() => setIsEditing(false)}
-              />
-            )}
-          </Box>
-          <Box my={4} textAlign="center">
-            <Button onClick={() => supabase.auth.signOut()}>Log out</Button>
-          </Box>
-        </form>
+            <ProfileDetails
+              label="Email"
+              value={session.user.email}
+              isEditing={false}
+            />
+            <ProfileDetails
+              label="Username"
+              value={username}
+              isEditing={isEditing}
+              onChange={handleUsernameChange}
+            />
+            <ProfileDetails
+              label="Course of Study"
+              value={course_of_study}
+              isEditing={isEditing}
+              onChange={handleCourseOfStudyChange}
+            />
+            <Box my={4} textAlign="center">
+              <Text fontSize="lg" fontWeight="bold" mb={2}>
+                Year of Study
+              </Text>
+              {isEditing ? (
+                <Select
+                  id="year_of_study"
+                  value={year_of_study}
+                  onChange={handleYearOfStudyChange}
+                  size="md"
+                  maxH={200}
+                  overflowY="auto"
+                >
+                  <option value="">Select Year of Study</option>
+                  <option value="Year 1">Year 1</option>
+                  <option value="Year 2">Year 2</option>
+                  <option value="Year 3">Year 3</option>
+                  <option value="Year 4">Year 4</option>
+                  <option value="Year 5">Year 5</option>
+                  <option value="Graduated">Graduated</option>
+                </Select>
+              ) : (
+                <Text>{year_of_study}</Text>
+              )}
+            </Box>
+            <Box my={4} textAlign="center">
+              {isEditing ? (
+                <Box>
+                  <Button type="submit" disabled={loading}>
+                    {loading ? 'Loading ...' : 'Update'}
+                  </Button>
+                  <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+                </Box>
+              ) : (
+                <Button onClick={() => setIsEditing(true)}>Edit</Button>
+              )}
+            </Box>
+            <Box my={4} textAlign="center">
+              <Button onClick={() => supabase.auth.signOut()}>Log out</Button>
+            </Box>
+          </form>
+        </Flex>
       </Flex>
-    </Container>
+    </Flex>
   );
 }
