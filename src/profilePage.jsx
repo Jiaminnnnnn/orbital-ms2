@@ -123,6 +123,7 @@ export default function Profile({ session }) {
                 setAvatarUrl(url);
                 updateProfile(event);
               }}
+              showUploadButton={isEditing}
             />
             <ProfileDetails
               label="Email"
