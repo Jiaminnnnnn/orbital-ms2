@@ -1,7 +1,28 @@
 import React, { useState } from 'react';
-import { VStack, Input, Textarea, Button, useColorModeValue, Box, Flex, Heading, Alert, AlertIcon, useToast } from '@chakra-ui/react';
+import { VStack, Input, Textarea, Button, Box, Flex, Heading, useToast, ChakraProvider, extendTheme, CSSReset, useColorModeValue } from '@chakra-ui/react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
+
+const customTheme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        margin: 0,
+        padding: 0,
+        boxSizing: "border-box",
+      },
+    },
+  },
+  colors: {
+    blue: {
+      300: '#3B82F6',
+    }
+  },
+  fonts: {
+    body: 'Georgia, sans-serif',
+    heading: 'Comic Sans MS, Comic Sans MS',
+  },
+});
 
 const ApplicationForm = () => {
     const [name, setName] = useState('');
@@ -10,10 +31,10 @@ const ApplicationForm = () => {
     const [year, setYear] = useState('');
     const [contact_email, setContact_email] = useState('');
     const [cost, setCost] = useState('');
-    const colorScheme = useColorModeValue('green', 'gray');
+    const colorScheme = useColorModeValue('blue', 'gray');
     const navigate = useNavigate(); // hook for navigation
     const toast = useToast(); // hook for showing toast notifications
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -50,21 +71,23 @@ const ApplicationForm = () => {
     }
 
     return (
-        <Flex alignItems="center" justifyContent="center" minH="100vh">
-            <Box w={["90%", "80%", "60%", "40%"]}>
-                <VStack 
-                    as="form"
-                    spacing={4} 
-                    padding={8} 
-                    onSubmit={handleSubmit} 
-                    backgroundColor={useColorModeValue('gray.100', 'gray.700')}
-                    borderRadius="md"
-                    boxShadow="lg"
-                >
-                    <Heading as="h2" size="xl" marginBottom={5}>
-                        Tutor Application Form
-                    </Heading>
-                    <Input
+        <ChakraProvider theme={customTheme}>
+            <CSSReset />
+            <Flex alignItems="center" justifyContent="center" minH="100vh" position="fixed" width="100%" bg="lightblue">
+                <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
+                    <VStack 
+                        as="form"
+                        spacing={4} 
+                        padding={8} 
+                        onSubmit={handleSubmit} 
+                        backgroundColor={useColorModeValue('whiteAlpha.900', 'gray.700')}
+                        borderRadius="md"
+                        boxShadow="lg"
+                    >
+                        <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading">
+                            Tutor Application Form
+                        </Heading>
+                        <Input
                         placeholder="Name"
                         value={name} 
                         onChange={(e) => setName(e.target.value)}
@@ -100,10 +123,13 @@ const ApplicationForm = () => {
                     >
                         Submit
                     </Button>
-                </VStack>
-            </Box>
-        </Flex>
+                    </VStack>
+                </Box>
+            </Flex>
+        </ChakraProvider>
     );
 }
 
 export default ApplicationForm;
+
+
