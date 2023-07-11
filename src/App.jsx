@@ -6,22 +6,25 @@ import Profile from './pages/profilePage';
 import ApplicationForm from './pages/applicationform';
 import ViewApplications from './pages/viewapplicationpage';
 import TutorGateway from './pages/TutorGateway';
+import ApplicationDetail from './pages/ApplicationDetail';
+import EditApplication from './pages/EditApplication';
 import { supabase } from './supabaseClient';
 
 function App() {
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState(supabase.auth.getSession());
+  const [user, setUser] = useState(supabase.auth.getUser());
 
   useEffect(() => {
-    const { data: session } = supabase.auth.getSession();
-    setSession(session);
-
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setUser(supabase.auth.getUser());
     });
-
+    
     return () => {
+      if (authListener) authListener.subscription.unsubscribe();
     };
   }, []);
+
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
@@ -51,6 +54,14 @@ function App() {
             path="/gateway"
             element={session ?<TutorGateway /> : <Navigate to="/" />}
           />
+          <Route
+            path="/application/:id"
+            element={session ? <ApplicationDetail user={user} /> : <Navigate to="/" />}
+         />
+          <Route
+           path="/application/edit/:id"
+           element={session ? <EditApplication /> : <Navigate to="/" />}
+        />
         </Routes>
       </Router>
     </div>
