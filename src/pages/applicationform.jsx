@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { VStack, Input, Textarea, Button, Box, Flex, Heading, useToast, ChakraProvider, extendTheme, CSSReset, useColorModeValue } from '@chakra-ui/react';
+import { VStack, Input, Textarea, Button, IconButton, Box, Flex, Heading, useToast, ChakraProvider, extendTheme, CSSReset, useColorModeValue } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
@@ -74,6 +75,15 @@ const ApplicationForm = () => {
         <ChakraProvider theme={customTheme}>
             <CSSReset />
             <Flex alignItems="center" justifyContent="center" minH="100vh" position="fixed" width="100%" bg="lightblue">
+            <IconButton
+          position="absolute"
+          top="1rem"
+          left="1rem"
+          size="lg"
+          aria-label="Back"
+          icon={<ArrowBackIcon />}
+          onClick={() => navigate('/gateway')}
+        />
                 <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
                     <VStack 
                         as="form"
