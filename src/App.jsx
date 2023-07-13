@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/loginPage';
 import Home from './pages/homePage';
@@ -8,6 +8,7 @@ import ViewApplications from './pages/viewapplicationpage';
 import TutorGateway from './pages/TutorGateway';
 import ApplicationDetail from './pages/ApplicationDetail';
 import EditApplication from './pages/EditApplication';
+import NotificationPage from './pages/notificationPage';
 import { supabase } from './supabaseClient';
 
 function App() {
@@ -24,7 +25,6 @@ function App() {
       if (authListener) authListener.subscription.unsubscribe();
     };
   }, []);
-
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
@@ -48,20 +48,24 @@ function App() {
           />
           <Route
             path="/applications"
-            element={session ?<ViewApplications /> : <Navigate to="/" />}
+            element={session ? <ViewApplications /> : <Navigate to="/" />}
           />
           <Route
             path="/gateway"
-            element={session ?<TutorGateway /> : <Navigate to="/" />}
+            element={session ? <TutorGateway /> : <Navigate to="/" />}
           />
           <Route
             path="/application/:id"
             element={session ? <ApplicationDetail user={user} /> : <Navigate to="/" />}
-         />
+          />
           <Route
-           path="/application/edit/:id"
-           element={session ? <EditApplication /> : <Navigate to="/" />}
-        />
+            path="/application/edit/:id"
+            element={session ? <EditApplication /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/notifications"
+            element={session ? <NotificationPage /> : <Navigate to="/" />}
+          />
         </Routes>
       </Router>
     </div>

@@ -32,6 +32,7 @@ export default function Profile({ session }) {
   const [username, setUsername] = useState(null);
   const [course_of_study, setCourseOfStudy] = useState(null);
   const [year_of_study, setYearOfStudy] = useState(null);
+  const [telegram_handle, setTelegramHandle] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function Profile({ session }) {
 
       let { data, error } = await supabase
         .from('profiles')
-        .select(`username, course_of_study, year_of_study, avatar_url`)
+        .select(`username, course_of_study, year_of_study, avatar_url, telegram_handle`)
         .eq('id', user.id)
         .single();
 
@@ -53,6 +54,7 @@ export default function Profile({ session }) {
         setUsername(data.username);
         setCourseOfStudy(data.course_of_study);
         setYearOfStudy(data.year_of_study);
+        setTelegramHandle(data.telegram_handle);
         setAvatarUrl(data.avatar_url);
       }
 
@@ -73,6 +75,7 @@ export default function Profile({ session }) {
       username,
       course_of_study,
       year_of_study,
+      telegram_handle,
       avatar_url,
       updated_at: new Date(),
     };
@@ -97,6 +100,10 @@ export default function Profile({ session }) {
 
   const handleYearOfStudyChange = (event) => {
     setYearOfStudy(event.target.value);
+  };
+
+  const handleTelegramHandle = (event) => {
+    setTelegramHandle(event.target.value);
   };
 
   return (
@@ -166,6 +173,12 @@ export default function Profile({ session }) {
                 <Text>{year_of_study}</Text>
               )}
             </Box>
+            <ProfileDetails
+              label="Telegram Handle"
+              value={telegram_handle}
+              isEditing={isEditing}
+              onChange={handleTelegramHandle}
+            />
             <Box my={4} textAlign="center">
               {isEditing ? (
                 <Box>

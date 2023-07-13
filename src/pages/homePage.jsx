@@ -57,6 +57,9 @@ function Home() {
                 <Button colorScheme={colorScheme} onClick={() => navigate('/gateway')}>
                   Find/Apply Tutor
                 </Button>
+                <Button as={RouterLink} to="/notifications" colorScheme={colorScheme}>
+                  Notifications
+                </Button>
               </VStack>
             ) : (
               <VStack spacing={4} align="stretch">

@@ -29,6 +29,7 @@ const ViewApplications = () => {
     const navigate = useNavigate();
     const [applications, setApplications] = useState([]);
     const [module, setModule] = useState('');
+
     const goToApplicationDetail = (id) => {
         navigate(`/application/${id}`);
     }
@@ -57,12 +58,54 @@ const ViewApplications = () => {
         }
     }
 
+
     const handleSearch = (event) => {
         event.preventDefault();
         fetchApplications(module);
     }
 
-    const colorScheme = useColorModeValue('blue', 'gray');
+    //notification function
+    const handleNotification = async (applicationId, userId) => {
+        try {
+          const { data: applicationData, error: applicationError } = await supabase
+            .from('tutor_applications')
+            .select('module')
+            .eq('id', applicationId)
+            .single();
+      
+          if (applicationError) {
+            throw applicationError;
+          }
+      
+          const { module } = applicationData;
+      
+          const { data: profileData, error: profileError } = await supabase
+            .from('profiles')
+            .select('contact_number')
+            .eq('user_id', userId)
+            .single();
+      
+          if (profileError) {
+            throw profileError;
+          }
+      
+          const { contact_number } = profileData;
+      
+          const { data, error } = await supabase.from('notifications').insert([
+            { message: 'I am interested to be your tutee', userId, module, contact_number }
+          ]);
+      
+          if (error) {
+            throw error;
+          }
+      
+          console.log('Notification sent');
+        } catch (error) {
+          console.error('Oops! Error triggering notification:', error.message);
+        }
+      };      
+      
+        const colorScheme = useColorModeValue('blue', 'gray');
     
     return (
         <ChakraProvider theme={customTheme}>
@@ -100,6 +143,10 @@ const ViewApplications = () => {
                                 <Button onClick={() => goToApplicationDetail(application.id)} colorScheme={colorScheme}>
                                     View More
                                 </Button>
+                                <Button onClick={() => handleNotification(application.id, userId)} colorScheme="blue">
+  Send Notification
+</Button>
+
                             </Box>
                         ))}
                     </VStack>
