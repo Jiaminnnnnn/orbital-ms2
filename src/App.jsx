@@ -9,6 +9,7 @@ import TutorGateway from './pages/TutorGateway';
 import ApplicationDetail from './pages/ApplicationDetail';
 import EditApplication from './pages/EditApplication';
 import NotificationPage from './pages/notificationPage';
+import NotificationDetail from './pages/NotificationDetail';
 import { supabase } from './pages/supabaseClient';
 
 function App() {
@@ -57,6 +58,10 @@ function App() {
           <Route
             path="/notifications"
             element={session ? <NotificationPage /> : <Navigate to="/" />}
+          />
+         <Route
+            path="/notification/:id"
+            element={session ? <NotificationDetail /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>

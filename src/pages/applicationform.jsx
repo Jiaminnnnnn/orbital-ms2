@@ -8,6 +8,7 @@ const customTheme = extendTheme({
   styles: {
     global: {
       body: {
+        backgroundColor: "lightblue",
         margin: 0,
         padding: 0,
         boxSizing: "border-box",
@@ -71,24 +72,27 @@ const ApplicationForm = () => {
         }
     }
 
-    return (
-        <ChakraProvider theme={customTheme}>
-            <CSSReset />
-            <Flex alignItems="center" justifyContent="center" minH="100vh" position="fixed" width="100%" bg="lightblue">
+// ... rest of your code ...
+
+return (
+    <ChakraProvider theme={customTheme}>
+        <CSSReset />
+        <Flex alignItems="center" justifyContent="center" height="100vh"  width="100%" bg="lightblue">
             <IconButton
-          position="absolute"
-          top="1rem"
-          left="1rem"
-          size="lg"
-          aria-label="Back"
-          icon={<ArrowBackIcon />}
-          onClick={() => navigate('/home')}
-        />
-                <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                        <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading" textAlign='center'>
-                            Application Form
-                        </Heading>
-                        <Input
+                position="absolute"
+                top="1rem"
+                left="1rem"
+                size="lg"
+                aria-label="Back"
+                icon={<ArrowBackIcon />}
+                onClick={() => navigate('/home')}
+            />
+            <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
+                <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading" textAlign='center'>
+                    Application Form
+                </Heading>
+                <form onSubmit={handleSubmit}>
+                    <Input
                         placeholder="Name"
                         value={name} 
                         onChange={(e) => setName(e.target.value)}
@@ -120,14 +124,17 @@ const ApplicationForm = () => {
                     />
                     <Button 
                         colorScheme={colorScheme} 
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit}
                     >
                         Submit
                     </Button>
-                </Box>
-            </Flex>
-        </ChakraProvider>
-    );
+                </form>
+            </Box>
+        </Flex>
+    </ChakraProvider>
+);
+
 }
 
 export default ApplicationForm;
