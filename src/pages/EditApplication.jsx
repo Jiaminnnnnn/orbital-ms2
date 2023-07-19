@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Heading, VStack, Button, IconButton, Input, useColorModeValue, ChakraProvider, CSSReset, extendTheme } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 const customTheme = extendTheme({
   styles: {

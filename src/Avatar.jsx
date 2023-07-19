@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from './supabaseClient';
+import { supabase } from './pages/supabaseClient';
 import { Button } from '@chakra-ui/react';
 
 export default function Avatar({ url, size, onUpload }) {
