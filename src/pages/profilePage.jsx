@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 import Avatar from '../Avatar';
 import { useNavigate } from 'react-router-dom';
 import { Select, Button, Flex, IconButton, Box, Text } from '@chakra-ui/react';

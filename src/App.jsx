@@ -9,7 +9,7 @@ import TutorGateway from './pages/TutorGateway';
 import ApplicationDetail from './pages/ApplicationDetail';
 import EditApplication from './pages/EditApplication';
 import NotificationPage from './pages/notificationPage';
-import { supabase } from './supabaseClient';
+import { supabase } from './pages/supabaseClient';
 
 function App() {
   const [session, setSession] = useState(supabase.auth.getSession());
@@ -39,20 +39,12 @@ function App() {
             element={session ? <Home /> : <Navigate to="/" />}
           />
           <Route
-            path="/profile"
-            element={session ? <Profile session={session} /> : <Navigate to="/" />}
-          />
-          <Route
             path="/apply"
             element={session ? <ApplicationForm /> : <Navigate to="/" />}
           />
           <Route
             path="/applications"
             element={session ? <ViewApplications /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/gateway"
-            element={session ? <TutorGateway /> : <Navigate to="/" />}
           />
           <Route
             path="/application/:id"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { VStack, Input, Textarea, Button, IconButton, Box, Flex, Heading, useToast, ChakraProvider, extendTheme, CSSReset, useColorModeValue } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
 const customTheme = extendTheme({
@@ -82,20 +82,11 @@ const ApplicationForm = () => {
           size="lg"
           aria-label="Back"
           icon={<ArrowBackIcon />}
-          onClick={() => navigate('/gateway')}
+          onClick={() => navigate('/home')}
         />
                 <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                    <VStack 
-                        as="form"
-                        spacing={4} 
-                        padding={8} 
-                        onSubmit={handleSubmit} 
-                        backgroundColor={useColorModeValue('whiteAlpha.900', 'gray.700')}
-                        borderRadius="md"
-                        boxShadow="lg"
-                    >
-                        <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading">
-                            Tutor Application Form
+                        <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading" textAlign='center'>
+                            Application Form
                         </Heading>
                         <Input
                         placeholder="Name"
@@ -108,12 +99,12 @@ const ApplicationForm = () => {
                         onChange={(e) => setModule(e.target.value)}
                     />
                     <Textarea 
-                        placeholder="Bio"
+                        placeholder="Other details"
                         value={bio} 
                         onChange={(e) => setBio(e.target.value)} 
                     />
                     <Input
-                        placeholder="Year"
+                        placeholder="Year of Study"
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                     />
@@ -123,7 +114,7 @@ const ApplicationForm = () => {
                         onChange={(e) => setContact_email(e.target.value)}
                     />
                     <Input
-                        placeholder="Cost"
+                        placeholder="Hourly Rate"
                         value={cost}
                         onChange={(e) => setCost(e.target.value)}
                     />
@@ -133,7 +124,6 @@ const ApplicationForm = () => {
                     >
                         Submit
                     </Button>
-                    </VStack>
                 </Box>
             </Flex>
         </ChakraProvider>

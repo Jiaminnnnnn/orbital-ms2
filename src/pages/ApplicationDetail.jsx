@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, IconButton, Text, VStack, Heading, useColorModeValue, Flex, ChakraProvider, CSSReset, extendTheme } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 
 const customTheme = extendTheme({
@@ -68,7 +68,7 @@ function ApplicationDetail() {
         .eq('id', application.id);
 
       if (error) console.error('Error deleting application', error);
-      else navigate('/applications');
+      else navigate('/home');
     } else {
       alert('You are not authorized to delete this application');
     }
@@ -80,9 +80,9 @@ function ApplicationDetail() {
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-      <Flex direction="column" alignItems="center" justifyContent="center" paddingTop="10vh" width="100%" bg="lightblue">
-        <Box w={["90%", "80%", "60%", "40%"]} boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-          <VStack spacing={6} p={8} boxShadow="lg" borderRadius="md" backgroundColor={useColorModeValue('whiteAlpha.900', 'gray.700')}>
+      <Flex alignItems="center" justifyContent="center" minH="100vh" position="fixed" width="100%" bg="lightblue">
+        <Box w={["90%", "80%", "60%", "40%"]} bg="whiteAlpha.900" p="20" rounded="md">
+          <VStack spacing={6} p={8} borderRadius="md" backgroundColor={'whiteAlpha.900'}>
           <IconButton
           position="absolute"
           top="1rem"
@@ -90,7 +90,7 @@ function ApplicationDetail() {
           size="lg"
           aria-label="Back"
           icon={<ArrowBackIcon />}
-          onClick={() => navigate('/applications')}
+          onClick={() => navigate('/home')}
         />
             <Heading as="h2" size="xl" marginBottom={5} color="blue.300" fontFamily="heading">
               Application Detail
@@ -99,10 +99,10 @@ function ApplicationDetail() {
               <>
                 <Text><strong>Name:</strong> {application.name}</Text>
                 <Text><strong>Module:</strong> {application.module}</Text>
-                <Text><strong>Bio:</strong> {application.bio}</Text>
-                <Text><strong>Year:</strong> {application.year}</Text>
+                <Text><strong>Other Details:</strong> {application.bio}</Text>
+                <Text><strong>Year of Study:</strong> {application.year}</Text>
                 <Text><strong>Contact Email:</strong> {application.contact_email}</Text>
-                <Text><strong>Cost:</strong> {application.cost}</Text>
+                <Text><strong>Hourly Rate: </strong> ${application.cost}</Text>
                 <Box>
                   <Button colorScheme={colorScheme} mr={3} onClick={handleEdit}>Edit</Button>
                   <Button colorScheme="red" onClick={handleDelete}>Delete</Button>

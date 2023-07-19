@@ -1,9 +1,23 @@
 import { useState } from 'react';
 import { Container, Heading, Text, Input, Button, Flex, Box, ChakraProvider, extendTheme, Stack } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 const customTheme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
+      },
+    },
+  },
+  colors: {
+    blue: {
+      300: '#3B82F6',
+    },
+  },
   fonts: {
     body: 'Georgia, sans-serif',
     heading: 'Comic Sans MS, Comic Sans MS',
