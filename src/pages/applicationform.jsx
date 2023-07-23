@@ -68,7 +68,7 @@ const ApplicationForm = () => {
                 duration: 3000,
                 isClosable: true,
             });
-            navigate('/home'); // after successful submission, redirect to homepage
+            navigate('/'); // after successful submission, redirect to homepage
         }
     }
 
